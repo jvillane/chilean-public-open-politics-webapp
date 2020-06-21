@@ -5,6 +5,8 @@ phases:
     runtime-versions:
       nodejs: 12
     commands:
+      - cp .env.template .env
+      - sed -i "s;=REACT_APP_BACKEND_BASE_URL;=https://raw.githubusercontent.com/jvillane/chilean-public-open-data/master;g" .env
       - yarn install
   build:
     commands:

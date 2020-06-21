@@ -6,5 +6,5 @@ Aplicación web implementada usando React+TypeScript que despliega información 
 
 Agradecimientos en la labor de diseño y construcción de este sitio a:
 
-* [Nabelka Muñoz](https://github.com/nabelka)
-* [Carlos Martínez](https://github.com/chuchurex)
+* [Carlos Martínez](https://www.linkedin.com/in/chuchurex/)
+* [Nabelka Muñoz](https://www.linkedin.com/in/nabelka-mu%C3%B1oz-1b0a66193/)
