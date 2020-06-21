@@ -6,8 +6,8 @@ import * as serviceWorker from './serviceWorker';
 import axios from 'axios';
 import ReactGA from 'react-ga';
 
-ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS as string);
-axios.defaults.baseURL = process.env.REACT_APP_BACKEND_BASE_URL;
+ReactGA.initialize('UA-170181856-1');
+axios.defaults.baseURL = 'https://raw.githubusercontent.com/jvillane/chilean-public-open-data/master';
 
 ReactDOM.render(
   <React.StrictMode>
