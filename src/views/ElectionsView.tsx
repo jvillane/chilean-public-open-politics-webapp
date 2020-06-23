@@ -11,9 +11,9 @@ export const ElectionsView: React.FC = () => {
     }, []);
 
   return (
-    <main>
+    <>
       <h1>Elecciones</h1>
       <ElectionList elections={elections}/>
-    </main>
+    </>
   )
 }

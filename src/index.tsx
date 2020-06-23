@@ -13,7 +13,7 @@ axios.defaults.baseURL = 'https://raw.githubusercontent.com/jvillane/chilean-pub
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App/>
   </React.StrictMode>,
   document.getElementById('root')
 );
