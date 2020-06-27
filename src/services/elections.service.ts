@@ -8,6 +8,7 @@ export const getElections = async (): Promise<Election[]> => {
     return _elections;
   } else {
     const response = await axios.get<Election[]>('data/elections.president.json');
+    _elections = response.data;
     return response.data;
   }
 }
