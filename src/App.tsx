@@ -6,6 +6,7 @@ import ReactGA from 'react-ga';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   fas,
+  faCheck,
   faTimes,
   faAngleRight
 } from '@fortawesome/free-solid-svg-icons';
@@ -17,6 +18,7 @@ import {JudiciaryView} from "./views/JudiciaryView";
 
 library.add(
   fas,
+  faCheck,
   faTimes,
   faAngleRight
 );
@@ -30,7 +32,7 @@ function App() {
   return (
     <Switch>
       <Route exact path="/inicio">
-        <HomeView/>
+        <Layout children={<HomeView/>}/>
       </Route>
       <Route exact path="/ejecutivo">
         <Layout children={<ExecutiveView/>}/>
