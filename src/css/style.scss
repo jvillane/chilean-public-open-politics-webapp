@@ -1,0 +1,12 @@
+@media (min-width: 1100px) {
+  header .MuiContainer-maxWidthLg {
+    max-width: 1100px;
+  }
+}
+
+@media (min-width: 576px) {
+  .MuiContainer-root {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}

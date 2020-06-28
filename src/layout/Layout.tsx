@@ -3,11 +3,17 @@ import {Header} from "./Header";
 import {Body} from "./Body";
 import {Footer} from "./Footer";
 
-export const Layout: React.FC = () => {
+import '../assets-messenger/base.scss';
+import '../css/style.scss';
+import '../css/style-messenger.scss';
+
+export const Layout: React.FC = ({children}) => {
   return (
-    <div className="wrapper">
+    <div className="hero-wrapper bg-composed-wrapper bg-light">
       <Header/>
-      <Body/>
+      <Body>
+        {children}
+      </Body>
       <Footer/>
     </div>
   )
