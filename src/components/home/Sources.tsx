@@ -24,13 +24,13 @@ export const Sources: React.FC = () => {
                     <div className="d-30 rounded-pill btn-icon bg-neutral-first mr-2">
                       <FontAwesomeIcon icon={['fas', 'check']}/>
                     </div>
-                    <span className="pt-1">Información Censal <span className="text-muted">- Instituto Nacional de Estadísticas</span></span>
+                    <span className="pt-1">Información Censal <span className="text-black-50">- Instituto Nacional de Estadísticas</span></span>
                   </div>
                   <div className="d-flex align-items-center">
                     <div className="d-30 rounded-pill btn-icon bg-neutral-first mr-2">
                       <FontAwesomeIcon icon={['fas', 'check']}/>
                     </div>
-                    <span className="pt-1">Resultados Electorales <span className="text-muted">- Servicio Electoral</span></span>
+                    <span className="pt-1">Resultados Electorales <span className="text-black-50">- Servicio Electoral</span></span>
                   </div>
                 </Grid>
                 <Grid item sm={6}>
@@ -38,7 +38,7 @@ export const Sources: React.FC = () => {
                     <div className="d-30 rounded-pill btn-icon bg-neutral-first mr-2">
                       <FontAwesomeIcon icon={['fas', 'check']}/>
                     </div>
-                    <span className="pt-1">Actividad Legislativa <span className="text-muted">- Cámara de Diputad@s</span></span>
+                    <span className="pt-1">Actividad Legislativa <span className="text-black-50">- Cámara de Diputad@s</span></span>
                   </div>
                 </Grid>
               </Grid>
