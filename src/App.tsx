@@ -15,6 +15,7 @@ import {HomeView} from "./views/HomeView";
 import {ExecutiveView} from "./views/ExecutiveView";
 import {LegislativeView} from "./views/LegislativeView";
 import {JudiciaryView} from "./views/JudiciaryView";
+import {ProfileView} from "./views/ProfileView";
 
 library.add(
   fas,
@@ -42,6 +43,9 @@ function App() {
       </Route>
       <Route exact path="/judicial">
         <Layout children={<JudiciaryView/>}/>
+      </Route>
+      <Route exact path="/figura/:id">
+        <Layout children={<ProfileView/>}/>
       </Route>
       <Redirect from="*" to="/inicio"/>
     </Switch>
