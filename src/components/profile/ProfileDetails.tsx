@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {Avatar, Container, Fade, Grid, Paper} from '@material-ui/core';
 import {BASE_URL} from "../../config";
-import {PublicFigure} from "../../services/profile.model";
+import {FiguraPublica} from "../../services/profile.model";
 import {getDetails} from "../../services/profile.service";
-import {Age} from "./Age";
+import {Age} from "../Age";
 import ContentLoader from "react-content-loader";
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const ProfileDetails: React.FC<Props> = ({id}) => {
-  const [details, setDetails] = useState<PublicFigure>();
+  const [details, setDetails] = useState<FiguraPublica>();
 
   useEffect(() => {
     setTimeout(() => {
@@ -42,13 +42,13 @@ export const ProfileDetails: React.FC<Props> = ({id}) => {
               {details && (
                 <Fade in timeout={1000}>
                   <div className="p-3 text-left">
-                    <Avatar variant="circle" alt={details.Name}
+                    <Avatar variant="circle" alt={details.Nombre}
                             src={`${BASE_URL}/img/avatar/${id}.jpeg`} style={{height: "150px", width: "150px"}}/>
                     <div className="font-weight-bold font-size-xl line-height-1 py-3">
-                      {details.Name}
+                      {details.Nombre}
                     </div>
                     <div className="pb-3 font-size-sm text-black-50">
-                      <Age born={details.Born}></Age>
+                      <Age born={details.Nacio}/>
                     </div>
                   </div>
                 </Fade>

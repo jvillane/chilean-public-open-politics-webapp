@@ -12,7 +12,7 @@ export const Age: React.FC<Props> = ({born}) => {
 
   return (
     <div>
-      {age} <Box color="info.main">({born})</Box>
+      {age} <Box color="info.main">({moment(born).format('DD-MM-YYYY')})</Box>
     </div>
   )
 }

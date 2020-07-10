@@ -6,10 +6,11 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {Button, Collapse, Container, List, ListItem} from '@material-ui/core';
 
 import projectLogo from '../assets/images/react.svg';
-import {NavLink} from 'react-router-dom';
+import {NavLink, useHistory} from 'react-router-dom';
 
 export const Header: React.FC = () => {
   const [collapse, setCollapse] = useState(false);
+  const history = useHistory();
   const toggle = () => setCollapse(!collapse);
 
   return (
@@ -40,8 +41,6 @@ export const Header: React.FC = () => {
                 <li className="justify-content-center">
                   <NavLink
                     to="/ejecutivo"
-                    onClick={() => {
-                    }}
                     className="font-weight-bold rounded-sm px-3">
                     Ejecutivo
                     <span className="opacity-5 dropdown-arrow">
@@ -108,7 +107,36 @@ export const Header: React.FC = () => {
                     to="/legislativo"
                     className="font-weight-bold rounded-sm px-3">
                     Legislativo
+                    <span className="opacity-5 dropdown-arrow">
+                    <FontAwesomeIcon icon={['fas', 'angle-down']}/>
+                  </span>
                   </NavLink>
+                  <div className="submenu-dropdown submenu-dropdown--md">
+                    <div className="shadow-lg w-100 bg-deep-sky p-4 rounded">
+                      <List component="div" className="nav-pills nav-transparent nav-pills-rounded flex-column">
+                        <ListItem
+                          button
+                          onClick={() => history.push('/legislativo/camara')}
+                          className="px-4 text-white-50 d-flex align-items-center">
+                          <span>Diputad@s</span>
+                          <FontAwesomeIcon
+                            icon={['fas', 'angle-right']}
+                            className="opacity-6 ml-auto"
+                          />
+                        </ListItem>
+                        <ListItem
+                          button
+                          onClick={() => history.push('/legislativo/senado')}
+                          className="px-4 d-flex text-white-50 align-items-center">
+                          <span>Senador@s</span>
+                          <FontAwesomeIcon
+                            icon={['fas', 'angle-right']}
+                            className="opacity-6 ml-auto"
+                          />
+                        </ListItem>
+                      </List>
+                    </div>
+                  </div>
                 </li>
                 <li className="justify-content-center">
                   <NavLink

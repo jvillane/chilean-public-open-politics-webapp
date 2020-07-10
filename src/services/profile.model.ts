@@ -1,31 +1,36 @@
-export interface PublicFigureReference {
+export interface MediaDetails {
+  avatar: string
+}
+
+export interface Media {
+  [id: string]: MediaDetails
+}
+
+export interface Referencia {
   Id: string
-  Name: string
+  Nombre: string
 }
 
-export interface PartnerReference {
-  Id: string
-  Name: string
-  From?: string
-  To?: string
+export interface ReferenciaPareja extends Referencia {
+  Desde?: string
+  Hasta?: string
 }
 
-export interface PublicFigure {
-  Name: string
-  Born: string
-  Died?: string
-  Family?: {
-    Wife?: PartnerReference[]
-    Husband?: PartnerReference[]
-    Children?: PublicFigureReference[]
+export interface FiguraPublica {
+  Nombre: string
+  Nacio: string
+  Murio?: string
+  Familia?: {
+    Esposa?: ReferenciaPareja[]
+    Marido?: ReferenciaPareja[]
+    Hijos?: Referencia[]
   }
-  Biography?: {
-    [source: string]: string
+  Biografia?: {
+    [fuente: string]: string
   }
-  DeputyId?: number | number[]
-  Image?: string
+  DiputadoId?: number | number[]
 }
 
-export interface PublicFigureList {
-  [id: string]: PublicFigure
+export interface FigurasPublicas {
+  [id: string]: FiguraPublica
 }
