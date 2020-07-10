@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Avatar, Container, Fade, Grid, Paper} from '@material-ui/core';
 import {BASE_URL} from "../../config";
 import {FiguraPublica} from "../../services/profile.model";
-import {getDetails} from "../../services/profile.service";
+import {getPublicFigure} from "../../services/profile.service";
 import {Age} from "../Age";
 import ContentLoader from "react-content-loader";
 
@@ -15,7 +15,7 @@ export const ProfileDetails: React.FC<Props> = ({id}) => {
 
   useEffect(() => {
     setTimeout(() => {
-      getDetails(id).then(publicFigure => setDetails(publicFigure));
+      getPublicFigure(id).then(publicFigure => setDetails(publicFigure));
     }, 2000);
   }, [id]);
 

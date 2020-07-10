@@ -10,3 +10,12 @@
     padding-right: 24px;
   }
 }
+
+.header-nav-menu ul > li > a {
+  min-width: 200px;
+  justify-content: center !important;
+}
+
+.clickable {
+  cursor: pointer;
+}

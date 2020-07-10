@@ -116,7 +116,7 @@ export const Header: React.FC = () => {
                       <List component="div" className="nav-pills nav-transparent nav-pills-rounded flex-column">
                         <ListItem
                           button
-                          onClick={() => history.push('/legislativo/camara')}
+                          onClick={() => history.push('/legislativo/camara/diputados')}
                           className="px-4 text-white-50 d-flex align-items-center">
                           <span>Diputad@s</span>
                           <FontAwesomeIcon

@@ -1,4 +1,4 @@
-import {Diputados, Periodos} from "./deputies.model";
+import {Diputado, Diputados, Periodos} from "./deputies.model";
 import axios from "axios";
 import moment from "moment";
 
@@ -26,4 +26,11 @@ export const getDeputies = async (): Promise<Diputados> => {
     _deputies = response.data;
   }
   return _deputies;
+}
+
+export const getDeputy = async (id: string): Promise<Diputado | undefined> => {
+  if (_deputies === undefined) {
+    await getDeputies();
+  }
+  return _deputies[id];
 }

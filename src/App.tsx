@@ -15,6 +15,7 @@ import {LegislativeSenatorsView} from "./views/LegislativeSenatorsView";
 import {LegislativeDeputiesView} from "./views/LegislativeDeputiesView";
 import {ThemeProvider} from '@material-ui/styles';
 import MuiTheme from "./theme";
+import {LegislativeDeputyDetails} from "./views/LegislativeDeputyDetails";
 
 library.add(
   fas,
@@ -45,8 +46,11 @@ function App() {
         <Route exact path="/legislativo/senado">
           <Layout children={<LegislativeSenatorsView/>}/>
         </Route>
-        <Route exact path="/legislativo/camara">
+        <Route exact path="/legislativo/camara/diputados">
           <Layout children={<LegislativeDeputiesView/>}/>
+        </Route>
+        <Route exact path="/legislativo/camara/diputados/:id">
+          <Layout children={<LegislativeDeputyDetails/>}/>
         </Route>
         <Route exact path="/judicial">
           <Layout children={<JudiciaryView/>}/>

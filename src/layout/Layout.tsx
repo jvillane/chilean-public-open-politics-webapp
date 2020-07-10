@@ -5,7 +5,6 @@ import {Footer} from "./Footer";
 
 import '../assets/base.scss';
 import '../css/style.scss';
-import '../css/style-messenger.scss';
 
 export const Layout: React.FC = ({children}) => {
   return (

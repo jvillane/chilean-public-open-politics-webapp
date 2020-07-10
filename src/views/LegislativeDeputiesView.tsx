@@ -6,10 +6,12 @@ import Tab from '@material-ui/core/Tab';
 import {getLapses} from "../services/deputies.service";
 import {Periodo, Periodos} from "../services/deputies.model";
 import {LapseDeputies} from "../components/legislative/LapseDeputies";
+import {useToggle} from "react-use";
 
 export const LegislativeDeputiesView: React.FC = () => {
   const [lapse, setLapse] = useState<Periodo>();
   const [lapses, setLapses] = useState<Periodos>();
+  const [all, toggle] = useToggle(false);
 
   useEffect(() => {
     getLapses()
@@ -34,39 +36,46 @@ export const LegislativeDeputiesView: React.FC = () => {
         </p>
       </Grid>
       <div className="pb-5">
-        <Button size="large" className="btn-pill shadow-second-sm btn-first">
+        <Button size="large" className={"btn-pill " + (all ? "btn-neutral-first" : "btn-first shadow-second-sm")}
+                onClick={() => toggle(false)}>
           <span className="btn-wrapper--label">Por Periodo</span>
         </Button>
-        <Button size="large" className="btn-neutral-first btn-pill ml-3">
+        <Button size="large" className={"btn-pill ml-3 " + (!all ? "btn-neutral-first" : "btn-first shadow-second-sm")}
+                onClick={() => toggle(true)}>
           <span>Todos</span>
         </Button>
       </div>
-      <Grid container spacing={3}>
-        <Grid item xs={4} sm={2}>
-          {lapses && (
-            <Tabs orientation="vertical" variant="scrollable"
-                  onChange={(event: React.ChangeEvent<{}>, newValue: Periodo) => {
-                    setLapse(newValue);
-                  }}
-                  value={lapse}>
-              {Object.keys(lapses)
-                .sort((key1, key2) => {
-                  return lapses[key2].Nombre.localeCompare(lapses[key1].Nombre)
-                })
-                .map(key => {
-                  return (
-                    <Tab key={key} label={lapses[key].Nombre} value={lapses[key]}/>
-                  )
-                })}
-            </Tabs>
-          )}
+      {all && (
+        <LapseDeputies/>
+      )}
+      {!all && (
+        <Grid container spacing={2}>
+          <Grid item xs={4} sm={3}>
+            {lapses && (
+              <Tabs orientation="vertical" variant="scrollable"
+                    onChange={(event: React.ChangeEvent<{}>, newValue: Periodo) => {
+                      setLapse(newValue);
+                    }}
+                    value={lapse}>
+                {Object.keys(lapses)
+                  .sort((key1, key2) => {
+                    return lapses[key2].Nombre.localeCompare(lapses[key1].Nombre)
+                  })
+                  .map(key => {
+                    return (
+                      <Tab key={key} label={lapses[key].Nombre} value={lapses[key]}/>
+                    )
+                  })}
+              </Tabs>
+            )}
+          </Grid>
+          <Grid item xs={8} sm={9}>
+            {lapse && (
+              <LapseDeputies lapse={lapse}/>
+            )}
+          </Grid>
         </Grid>
-        <Grid item xs={8} sm={10}>
-          {lapse && (
-            <LapseDeputies lapse={lapse}/>
-          )}
-        </Grid>
-      </Grid>
+      )}
     </Container>
   )
 }
