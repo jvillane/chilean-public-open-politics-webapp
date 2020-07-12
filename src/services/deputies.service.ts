@@ -1,4 +1,4 @@
-import {Diputado, Diputados, Periodos} from "./deputies.model";
+import {Diputado, Diputados, Periodos, Votaciones} from "./deputies.model";
 import axios from "axios";
 import moment from "moment";
 
@@ -33,4 +33,19 @@ export const getDeputy = async (id: string): Promise<Diputado | undefined> => {
     await getDeputies();
   }
   return _deputies[id];
+}
+
+export const getVoting = async (year: number, month: number): Promise<Votaciones> => {
+  const response = await axios.get<Votaciones>(`data/diputados.votacion.${year}.json`);
+  const result: Votaciones = {
+    Diputados: response.data.Diputados,
+    Votaciones: {}
+  };
+  for (const voteId in response.data.Votaciones) {
+    const date = moment(response.data.Votaciones[voteId].Fecha);
+    if(date.get('year') === year && date.get('month') === month) {
+      result.Votaciones[voteId] = response.data.Votaciones[voteId];
+    }
+  }
+  return result;
 }

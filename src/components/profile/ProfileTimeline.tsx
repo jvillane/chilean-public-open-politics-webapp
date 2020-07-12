@@ -15,8 +15,8 @@ import moment, {Moment} from "moment";
 import {getLapses} from "../../services/deputies.service";
 
 interface Props {
+  publicFigure: FiguraPublica
   deputy?: Diputado
-  publicFigure?: FiguraPublica
 }
 
 interface Event {
@@ -25,7 +25,7 @@ interface Event {
   children: ReactNode
 }
 
-export const DeputyProfileTimeline: React.FC<Props> = ({deputy, publicFigure}) => {
+export const ProfileTimeline: React.FC<Props> = ({publicFigure, deputy }) => {
   const [events, setEvents] = useState<Event[]>();
 
   useEffect(() => {
@@ -36,8 +36,6 @@ export const DeputyProfileTimeline: React.FC<Props> = ({deputy, publicFigure}) =
 
   const updateEvents = (lapses: Periodos) => {
     if (deputy) {
-      console.log(deputy);
-      console.log(lapses);
       const events: Event[] = [];
       for (const lapse of Object.values(lapses)) {
         for (const militancy of deputy.Militancia) {
@@ -53,7 +51,8 @@ export const DeputyProfileTimeline: React.FC<Props> = ({deputy, publicFigure}) =
             events.push({
               date,
               displayDate: date.format("DD-MMM-YYYY"),
-              children: <>{militancy.Alias === 'IND' ? <>Cambio en militancia, a bancada <b>Independiente</b></> : <>Ahora pertenece a <b>{militancy.Nombre}</b></>}</>
+              children: <>{militancy.Alias === 'IND' ? <>Cambio en militancia, a
+                bancada <b>Independiente</b></> : <>Ahora pertenece a <b>{militancy.Nombre}</b></>}</>
             })
           }
           if (militancy.Termino === lapse.Termino) {

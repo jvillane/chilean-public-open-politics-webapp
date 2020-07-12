@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Diputados, Periodo} from "../../services/deputies.model";
 import {getDeputies} from "../../services/deputies.service";
 import {Grid} from "@material-ui/core";
-import {DeputyListItem} from "./DeputyListItem";
+import {DeputyMini} from "./DeputyMini";
 import {getMedia} from "../../services/profile.service";
 import moment from "moment";
 
@@ -10,7 +10,7 @@ interface Props {
   lapse?: Periodo
 }
 
-export const LapseDeputies: React.FC<Props> = ({lapse}) => {
+export const DeputiesLapse: React.FC<Props> = ({lapse}) => {
   const [deputies, setDeputies] = useState<Diputados>();
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export const LapseDeputies: React.FC<Props> = ({lapse}) => {
       {filteredDeputies && Object.keys(filteredDeputies).map(key => {
         return (
           <Grid item xs={6} sm={4} xl={3} key={key}>
-            <DeputyListItem id={key} deputy={filteredDeputies[key]}/>
+            <DeputyMini id={key} deputy={filteredDeputies[key]}/>
           </Grid>
         )
       })}

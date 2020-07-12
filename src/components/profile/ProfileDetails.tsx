@@ -19,8 +19,6 @@ export const ProfileDetails: React.FC<Props> = ({id}) => {
     }, 2000);
   }, [id]);
 
-  console.log(details);
-
   return (
     <>
       <Container>

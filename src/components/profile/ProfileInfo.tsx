@@ -8,12 +8,12 @@ import ContentLoader from "react-content-loader";
 import {Diputado} from "../../services/deputies.model";
 
 interface Props {
+  publicFigure: FiguraPublica
   deputy?: Diputado
-  publicFigure?: FiguraPublica
 }
 
-export const DeputyProfileInfo: React.FC<Props> = ({deputy, publicFigure}) => {
-  if(deputy && publicFigure){
+export const ProfileInfo: React.FC<Props> = ({publicFigure, deputy}) => {
+  if(deputy){
     return (
       <FadeIn transitionDuration={1000}>
         <div className="p-3 text-left">

@@ -5,7 +5,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import {getLapses} from "../services/deputies.service";
 import {Periodo, Periodos} from "../services/deputies.model";
-import {LapseDeputies} from "../components/legislative/LapseDeputies";
+import {DeputiesLapse} from "../components/legislative/DeputiesLapse";
 import {useToggle} from "react-use";
 
 export const LegislativeDeputiesView: React.FC = () => {
@@ -46,7 +46,7 @@ export const LegislativeDeputiesView: React.FC = () => {
         </Button>
       </div>
       {all && (
-        <LapseDeputies/>
+        <DeputiesLapse/>
       )}
       {!all && (
         <Grid container spacing={2}>
@@ -71,7 +71,7 @@ export const LegislativeDeputiesView: React.FC = () => {
           </Grid>
           <Grid item xs={8} sm={9}>
             {lapse && (
-              <LapseDeputies lapse={lapse}/>
+              <DeputiesLapse lapse={lapse}/>
             )}
           </Grid>
         </Grid>

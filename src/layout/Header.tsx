@@ -113,12 +113,15 @@ export const Header: React.FC = () => {
                   </NavLink>
                   <div className="submenu-dropdown submenu-dropdown--md">
                     <div className="shadow-lg w-100 bg-deep-sky p-4 rounded">
+                      <div className="px-4 text-uppercase pb-2 text-white font-weight-bold font-size-sm">
+                        Diputad@s
+                      </div>
                       <List component="div" className="nav-pills nav-transparent nav-pills-rounded flex-column">
                         <ListItem
                           button
-                          onClick={() => history.push('/legislativo/camara/diputados')}
+                          onClick={() => history.push('/legislativo/camara/integrantes')}
                           className="px-4 text-white-50 d-flex align-items-center">
-                          <span>Diputad@s</span>
+                          <span>Integrantes</span>
                           <FontAwesomeIcon
                             icon={['fas', 'angle-right']}
                             className="opacity-6 ml-auto"
@@ -126,9 +129,34 @@ export const Header: React.FC = () => {
                         </ListItem>
                         <ListItem
                           button
-                          onClick={() => history.push('/legislativo/senado')}
-                          className="px-4 d-flex text-white-50 align-items-center">
-                          <span>Senador@s</span>
+                          onClick={() => history.push('/legislativo/camara/votaciones')}
+                          className="px-4 text-white-50 d-flex align-items-center">
+                          <span>Votaciones</span>
+                          <FontAwesomeIcon
+                            icon={['fas', 'angle-right']}
+                            className="opacity-6 ml-auto"
+                          />
+                        </ListItem>
+                      </List>
+                      <div className="px-4 text-uppercase pb-2 text-white font-weight-bold font-size-sm">
+                        Senador@s
+                      </div>
+                      <List component="div" className="nav-pills nav-transparent nav-pills-rounded flex-column">
+                        <ListItem
+                          button
+                          onClick={() => history.push('/legislativo/senado/integrantes')}
+                          className="px-4 text-white-50 d-flex align-items-center">
+                          <span>Integrantes</span>
+                          <FontAwesomeIcon
+                            icon={['fas', 'angle-right']}
+                            className="opacity-6 ml-auto"
+                          />
+                        </ListItem>
+                        <ListItem
+                          button
+                          onClick={() => history.push('/legislativo/senado/votaciones')}
+                          className="px-4 text-white-50 d-flex align-items-center">
+                          <span>Votaciones</span>
                           <FontAwesomeIcon
                             icon={['fas', 'angle-right']}
                             className="opacity-6 ml-auto"
