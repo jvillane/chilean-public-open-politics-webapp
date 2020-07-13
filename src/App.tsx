@@ -4,7 +4,16 @@ import {Redirect, Route, Switch, useHistory} from "react-router-dom";
 import ReactGA from 'react-ga';
 
 import {library} from '@fortawesome/fontawesome-svg-core';
-import {faAngleRight, faCheck, faMinusCircle, fas, faTimes, faUser} from '@fortawesome/free-solid-svg-icons';
+import {
+  faAngleRight,
+  faBan,
+  faCheck, faFemale,
+  faMale,
+  faMinusCircle,
+  fas,
+  faTimes,
+  faUser
+} from '@fortawesome/free-solid-svg-icons';
 
 import {HomeView} from "./views/HomeView";
 import {ExecutiveView} from "./views/ExecutiveView";
@@ -16,11 +25,15 @@ import {ThemeProvider} from '@material-ui/styles';
 import MuiTheme from "./theme";
 import {LegislativeDeputyDetailsView} from "./views/LegislativeDeputyDetailsView";
 import {LegislativeDeputiesVotingView} from "./views/LegislativeDeputiesVotingView";
+import {LegislativeDeputiesVotingDetailsView} from "./views/LegislativeDeputiesVotingDetailsView";
 
 library.add(
   fas,
   faAngleRight,
+  faBan,
   faCheck,
+  faFemale,
+  faMale,
   faMinusCircle,
   faTimes,
   faUser
@@ -50,11 +63,14 @@ function App() {
         <Route exact path="/legislativo/camara/integrantes">
           <Layout children={<LegislativeDeputiesView/>}/>
         </Route>
-        <Route exact path="/legislativo/camara/integrantes/:id">
+        <Route exact path="/legislativo/camara/integrante/:id">
           <Layout children={<LegislativeDeputyDetailsView/>}/>
         </Route>
-        <Route exact path="/legislativo/camara/votaciones">
+        <Route exact path="/legislativo/camara/votaciones/:year?/:month?">
           <Layout children={<LegislativeDeputiesVotingView/>}/>
+        </Route>
+        <Route exact path="/legislativo/camara/votacion/:year/:id">
+          <Layout children={<LegislativeDeputiesVotingDetailsView/>}/>
         </Route>
         <Route exact path="/judicial">
           <Layout children={<JudiciaryView/>}/>

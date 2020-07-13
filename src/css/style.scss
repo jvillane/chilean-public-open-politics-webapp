@@ -19,3 +19,9 @@
 .clickable {
   cursor: pointer;
 }
+
+.CircularProgressbar.circular-progress-xs .CircularProgressbar-text {
+  font-size: 32px !important;
+  font-weight: 200 !important;
+  font-family: Heebo, sans-serif;
+}

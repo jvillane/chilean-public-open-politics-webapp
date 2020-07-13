@@ -4,7 +4,7 @@ import {Votaciones} from "../../services/deputies.model";
 import {DeputiesVotingMini} from "./DeputiesVotingMini";
 import FadeIn from "react-fade-in";
 import ContentLoader from "react-content-loader";
-import {getVoting} from "../../services/deputies.service";
+import {getVotings} from "../../services/deputies.service";
 
 interface Props {
   year: number
@@ -16,7 +16,7 @@ export const DeputiesVotingsByYear: React.FC<Props> = ({year, month}) => {
 
   useEffect(() => {
     setVotings(undefined);
-    getVoting(year, month)
+    getVotings(year, month)
       .then(votings => setVotings(votings))
   }, [year, month])
 

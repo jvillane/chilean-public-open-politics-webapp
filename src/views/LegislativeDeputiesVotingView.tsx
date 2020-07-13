@@ -1,12 +1,30 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
-import {Card, CardContent, CardHeader, Container, Grid, Typography} from '@material-ui/core';
+import {Card, CardContent, CardHeader, Container, Grid} from '@material-ui/core';
 import moment, {Moment} from "moment";
 import {DeputiesVotingsByYear} from "../components/legislative/DeputiesVotingsByYear";
 import {DatePicker} from "@material-ui/pickers";
+import {useHistory, useParams} from "react-router";
+
+interface Params {
+  year: string
+  month: string
+}
 
 export const LegislativeDeputiesVotingView: React.FC = () => {
   const [date, setDate] = useState<Moment>(moment());
+  const {year, month} = useParams<Params>();
+  const history = useHistory();
+
+  useEffect(() => {
+    if(year === undefined || month === undefined) {
+      const today = moment();
+      history.replace(`/legislativo/camara/votaciones/${today.get('year')}/${today.get('month')}`)
+    } else {
+      setDate(moment({year: +year, month: +month, day: 1}));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [year, month]);
 
   return (
     <Container className="text-black text-center py-5">

@@ -18,7 +18,7 @@ export const DeputyMini: React.FC<Props> = ({id, deputy}) => {
 
   return (
     <div className="position-relative py-2 py-xl-4 px-3 px-xl-4 clickable"
-         onClick={() => history.push(`/legislativo/camara/integrantes/${id}`)}>
+         onClick={() => history.push(`/legislativo/camara/integrante/${id}`)}>
       <div className="divider-v divider-v-lg"/>
       <div className="avatar-icon-wrapper rounded-circle d-80 mx-auto">
         <div className="d-block p-0 avatar-icon-wrapper rounded-circle m-0">
