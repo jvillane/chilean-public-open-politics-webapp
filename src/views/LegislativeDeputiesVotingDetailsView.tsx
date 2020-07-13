@@ -1,25 +1,13 @@
 import React, {useEffect, useState} from "react";
 
-import {
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Container,
-  Divider,
-  Grid,
-  List,
-  ListItem,
-  Typography
-} from '@material-ui/core';
+import {Button, Card, CardHeader, Container, Grid, List, ListItem} from '@material-ui/core';
 import {Votacion} from "../services/deputies.model";
 import {useParams} from "react-router";
 import {getVoting} from "../services/deputies.service";
 import moment from "moment";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import CountUp from 'react-countup';
-import Avatar from "react-avatar";
-import {CircularProgressbar} from 'react-circular-progressbar';
+import {DeputiesVotingParties} from "../components/legislative/DeputiesVotingParties";
 
 interface Params {
   year: string
@@ -112,7 +100,7 @@ export const LegislativeDeputiesVotingDetailsView: React.FC = () => {
             <CardHeader title="Votación"/>
             <hr className="m-0"/>
             <List className="list-group-flush">
-              <ListItem button className={"py-3 d-block " + (resultFilter.yes ? '' : 'bg-gray-200')}
+              <ListItem button className={"py-2 d-block " + (resultFilter.yes ? '' : 'bg-gray-200')}
                         onClick={() => setResultFilter({...resultFilter, yes: !resultFilter.yes})}>
                 <div className="d-flex align-items-center flex-column flex-sm-row">
                   <div>
@@ -127,7 +115,7 @@ export const LegislativeDeputiesVotingDetailsView: React.FC = () => {
                   </div>
                   <div className="pl-0 pl-sm-3">
                     <div className="d-block text-center d-sm-flex align-items-center">
-                      <span className="font-size-lg text-black-50">Si</span>
+                      <span className="font-size-md text-black-50">Si</span>
                     </div>
                   </div>
                   <div className="mt-3 mt-sm-0 ml-sm-auto text-success">
@@ -135,7 +123,7 @@ export const LegislativeDeputiesVotingDetailsView: React.FC = () => {
                   </div>
                 </div>
               </ListItem>
-              <ListItem button className={"py-3 d-block " + (resultFilter.no ? '' : 'bg-gray-200')}
+              <ListItem button className={"py-2 d-block " + (resultFilter.no ? '' : 'bg-gray-200')}
                         onClick={() => setResultFilter({...resultFilter, no: !resultFilter.no})}>
                 <div className="d-flex align-items-center flex-column flex-sm-row">
                   <div>
@@ -150,7 +138,7 @@ export const LegislativeDeputiesVotingDetailsView: React.FC = () => {
                   </div>
                   <div className="pl-0 pl-sm-3">
                     <div className="d-block text-center d-sm-flex align-items-center">
-                      <span className="font-size-lg text-black-50">No</span>
+                      <span className="font-size-md text-black-50">No</span>
                     </div>
                   </div>
                   <div className="mt-3 mt-sm-0 ml-sm-auto text-danger">
@@ -158,7 +146,7 @@ export const LegislativeDeputiesVotingDetailsView: React.FC = () => {
                   </div>
                 </div>
               </ListItem>
-              <ListItem button className={"py-3 d-block " + (resultFilter.abstention ? '' : 'bg-gray-200')}
+              <ListItem button className={"py-2 d-block " + (resultFilter.abstention ? '' : 'bg-gray-200')}
                         onClick={() => setResultFilter({...resultFilter, abstention: !resultFilter.abstention})}>
                 <div className="d-flex align-items-center flex-column flex-sm-row">
                   <div>
@@ -173,7 +161,7 @@ export const LegislativeDeputiesVotingDetailsView: React.FC = () => {
                   </div>
                   <div className="pl-0 pl-sm-3">
                     <div className="d-block text-center d-sm-flex align-items-center">
-                      <span className="font-size-lg text-black-50">Abstencion</span>
+                      <span className="font-size-md text-black-50">Abstencion</span>
                     </div>
                   </div>
                   <div className="mt-3 mt-sm-0 ml-sm-auto text-warning">
@@ -181,7 +169,7 @@ export const LegislativeDeputiesVotingDetailsView: React.FC = () => {
                   </div>
                 </div>
               </ListItem>
-              <ListItem button className={"py-3 d-block " + (resultFilter.dispensed ? '' : 'bg-gray-200')}
+              <ListItem button className={"py-2 d-block " + (resultFilter.dispensed ? '' : 'bg-gray-200')}
                         onClick={() => setResultFilter({...resultFilter, dispensed: !resultFilter.dispensed})}>
                 <div className="d-flex align-items-center flex-column flex-sm-row">
                   <div>
@@ -196,7 +184,7 @@ export const LegislativeDeputiesVotingDetailsView: React.FC = () => {
                   </div>
                   <div className="pl-0 pl-sm-3">
                     <div className="d-block text-center d-sm-flex align-items-center">
-                      <span className="font-size-lg text-black-50">Dispensado</span>
+                      <span className="font-size-md text-black-50">Dispensado</span>
                     </div>
                   </div>
                   <div className="mt-3 mt-sm-0 ml-sm-auto text-dark">
@@ -208,68 +196,9 @@ export const LegislativeDeputiesVotingDetailsView: React.FC = () => {
           </Card>
         </Grid>
         <Grid item sm={8}>
-          <Card className="card-box">
-            <CardContent>
-              <Grid container direction="row" alignItems="center" justify="space-between" className="mb-3">
-                <div>
-                  <Grid container direction="row" alignItems="center" justify="flex-start">
-                    <div className="avatar-icon-wrapper m-0 mr-2 d-50">
-                      <Avatar color="blue" value="UDI" className="rounded" size="50px"/>
-                    </div>
-                    <div className="font-size-lg font-weight-bold p-0">
-                      Unión Demócrata Independiente
-                    </div>
-                  </Grid>
-                </div>
-                <div className="font-size-md p-0 text-black-50">
-                  24 miembros
-                </div>
-              </Grid>
-              <Divider className="my-3"/>
-              <Grid container spacing={1}>
-                <Grid item xs={6} md={3} className="text-center">
-                  <Grid container direction="row" justify="flex-start" alignItems="center">
-                    <CircularProgressbar
-                      value={12} maxValue={24} text="50%" strokeWidth={6}
-                      className="circular-progress-success circular-progress-xs mr-2"/>
-                    <Typography className="text-black-50" variant="body1">
-                      10 <FontAwesomeIcon icon={['fas', 'male']}/> | 2 <FontAwesomeIcon icon={['fas', 'female']}/>
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Grid item xs={6} md={3} className="text-center">
-                  <Grid container direction="row" justify="flex-start" alignItems="center">
-                    <CircularProgressbar
-                      value={8} maxValue={24} text="33%" strokeWidth={6}
-                      className="circular-progress-danger circular-progress-xs mr-2"/>
-                    <Typography className="text-black-50" variant="body1">
-                      7 <FontAwesomeIcon icon={['fas', 'male']}/> | 1 <FontAwesomeIcon icon={['fas', 'female']}/>
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Grid item xs={6} md={3} className="text-center">
-                  <Grid container direction="row" justify="flex-start" alignItems="center">
-                    <CircularProgressbar
-                      value={3} maxValue={24} text="13%" strokeWidth={6}
-                      className="circular-progress-warning circular-progress-xs mr-2"/>
-                    <Typography className="text-black-50" variant="body1">
-                      3 <FontAwesomeIcon icon={['fas', 'female']}/>
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Grid item xs={6} md={3} className="text-center">
-                  <Grid container direction="row" justify="flex-start" alignItems="center">
-                    <CircularProgressbar
-                      value={1} maxValue={24} text="4%" strokeWidth={6}
-                      className="circular-progress-dark circular-progress-xs mr-2"/>
-                    <Typography className="text-black-50" variant="body1">
-                      1 <FontAwesomeIcon icon={['fas', 'male']}/>
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
+          {voting && (
+            <DeputiesVotingParties voting={voting}/>
+          )}
         </Grid>
       </Grid>
     </Container>
