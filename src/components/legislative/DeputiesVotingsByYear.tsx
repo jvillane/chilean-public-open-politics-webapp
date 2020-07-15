@@ -5,6 +5,7 @@ import {DeputiesVotingMini} from "./DeputiesVotingMini";
 import FadeIn from "react-fade-in";
 import ContentLoader from "react-content-loader";
 import {getVotings} from "../../services/deputies.service";
+import moment from "moment";
 
 interface Props {
   year: number
@@ -53,7 +54,9 @@ export const DeputiesVotingsByYear: React.FC<Props> = ({year, month}) => {
           </Grid>
         )
       })}
-      {votings && Object.keys(votings.Votaciones).map(id => {
+      {votings && Object.keys(votings.Votaciones)
+        .sort((key1, key2) => moment(votings.Votaciones[key2].Fecha).diff(moment(votings.Votaciones[key1].Fecha)))
+        .map(id => {
         return (
           <Grid key={id} item md={6} xl={4}>
             <FadeIn transitionDuration={1000}>

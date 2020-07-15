@@ -8,6 +8,7 @@ import {AvatarGroup} from "@material-ui/lab";
 import {Party} from "../../services/deputies.service";
 import {getMedia, getMediadetails} from "../../services/profile.service";
 import {BASE_URL} from "../../config";
+import {DeputyMini} from "./DeputyMini";
 
 export interface PartyDetails {
   deputies: Diputados
@@ -24,6 +25,12 @@ type VoteType = 'Afirmativo' | 'En Contra' | 'Abstencion' | 'Dispensado';
 export const DeputiesVotingParty: React.FC<Props> = ({partyDetails, voting}) => {
 
   const [deputiesVotes, setDeputiesVotes] = useState<{ [key in VoteType]: Diputados }>();
+  const [expandedAccordion, setExpandedAccordion] = useState<{ [key in VoteType]: boolean }>({
+    Afirmativo: false,
+    'En Contra': false,
+    Abstencion: false,
+    Dispensado: false
+  });
 
   useEffect(() => {
     getMedia()
@@ -51,7 +58,6 @@ export const DeputiesVotingParty: React.FC<Props> = ({partyDetails, voting}) => 
               break;
           }
         }
-
         setDeputiesVotes(deputiesVotes);
       })
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -85,7 +91,11 @@ export const DeputiesVotingParty: React.FC<Props> = ({partyDetails, voting}) => 
                 const color = vote === "Afirmativo" ? "success" : vote === "En Contra" ? "danger" : vote === "Abstencion" ? "warning" : "dark";
                 return (
                   <Accordion key={`${partyDetails.party.Alias}_${vote}`}
-                             className="political-party-votation-detail my-0">
+                             className="political-party-votation-detail my-0"
+                             onChange={
+                               (event, expanded) =>
+                                 setExpandedAccordion({...expandedAccordion, [vote]: expanded})
+                             }>
                     <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                       <div className="title">
                         <div className="font-size-sm text-black-50">{vote}</div>
@@ -98,7 +108,7 @@ export const DeputiesVotingParty: React.FC<Props> = ({partyDetails, voting}) => 
                         </Card>
                       </div>
                       <div className="avatars">
-                        <AvatarGroup max={11}>
+                        <AvatarGroup max={11} hidden={expandedAccordion[vote]}>
                           {Object.values(deputiesVotes[vote]).map(deputy => {
                             const mediaDetails = getMediadetails(deputy.Id);
                             const name = `${deputy.Nombres} ${deputy.ApellidoPaterno} ${deputy.ApellidoMaterno}`;
@@ -118,95 +128,14 @@ export const DeputiesVotingParty: React.FC<Props> = ({partyDetails, voting}) => 
                     </AccordionSummary>
                     <AccordionDetails>
                       <Grid container spacing={0}>
-                        <Grid item md={6}>
-                          <div className="divider-v divider-v-md"/>
-                          <div className="d-flex align-items-center justify-content-between p-3">
-                            <div>
-                              <b>Reports</b>
-                              <div className="text-black-50">Monthly sales reports</div>
-                            </div>
-                            <div className="font-weight-bold text-danger font-size-xl">
-                              <CountUp
-                                start={0}
-                                end={2.363}
-                                duration={6}
-                                delay={2}
-                                separator=""
-                                decimals={3}
-                                decimal=","
-                              />
-                            </div>
-                          </div>
-                          <div className="divider"/>
-                          <div className="d-flex align-items-center justify-content-between p-3">
-                            <div>
-                              <b>User</b>
-                              <div className="text-black-50">Visitors last week</div>
-                            </div>
-                            <div className="font-weight-bold text-success font-size-xl">
-                              <CountUp
-                                start={0}
-                                end={584}
-                                duration={6}
-                                delay={2}
-                                separator=""
-                                decimals={0}
-                                decimal=","
-                              />
-                            </div>
-                          </div>
-                          <div className="divider"/>
-                          <div className="d-flex align-items-center justify-content-between p-3">
-                            <div>
-                              <b>Sales</b>
-                              <div className="text-black-50">
-                                Total average weekly report
-                              </div>
-                            </div>
-                            <div className="font-weight-bold text-warning font-size-xl">
-                              <CountUp
-                                start={0}
-                                end={483}
-                                duration={6}
-                                delay={2}
-                                separator=""
-                                decimals={0}
-                                decimal=","
-                              />
-                            </div>
-                          </div>
-                        </Grid>
-                        <Grid item md={6}>
-                          <div className="d-flex align-items-center justify-content-between p-3">
-                            <div>
-                              <b>Stats</b>
-                              <div className="text-black-50">Last month targets</div>
-                            </div>
-                            <div className="font-weight-bold text-warning font-size-xl">
-                              $1,23M
-                            </div>
-                          </div>
-                          <div className="divider"/>
-                          <div className="d-flex align-items-center justify-content-between p-3">
-                            <div>
-                              <b>Payments</b>
-                              <div className="text-black-50">Week's expenses</div>
-                            </div>
-                            <div className="font-weight-bold text-danger font-size-xl">
-                              - $123,305
-                            </div>
-                          </div>
-                          <div className="divider"/>
-                          <div className="d-flex align-items-center justify-content-between p-3">
-                            <div>
-                              <b>Orders</b>
-                              <div className="text-black-50">Total products ordered</div>
-                            </div>
-                            <div className="font-weight-bold text-warning font-size-xl">
-                              65
-                            </div>
-                          </div>
-                        </Grid>
+                        {Object.keys(deputiesVotes[vote]).map(deputyId => {
+                          const deputy = deputiesVotes[vote][deputyId];
+                          return (
+                            <Grid key={`deputy_${deputyId}`} item md={4} className="text-center">
+                              <DeputyMini id={deputyId} deputy={deputy}/>
+                            </Grid>
+                          )
+                        })}
                       </Grid>
                     </AccordionDetails>
                   </Accordion>
