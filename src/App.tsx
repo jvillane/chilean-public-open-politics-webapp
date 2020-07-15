@@ -7,7 +7,8 @@ import {library} from '@fortawesome/fontawesome-svg-core';
 import {
   faAngleRight,
   faBan,
-  faCheck, faFemale,
+  faCheck,
+  faFemale,
   faMale,
   faMinusCircle,
   fas,
@@ -16,10 +17,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import {HomeView} from "./views/HomeView";
-import {ExecutiveView} from "./views/ExecutiveView";
-import {LegislativeView} from "./views/LegislativeView";
-import {JudiciaryView} from "./views/JudiciaryView";
-import {LegislativeSenatorsView} from "./views/LegislativeSenatorsView";
 import {LegislativeDeputiesView} from "./views/LegislativeDeputiesView";
 import {ThemeProvider} from '@material-ui/styles';
 import MuiTheme from "./theme";
@@ -51,29 +48,17 @@ function App() {
         <Route exact path="/inicio">
           <Layout children={<HomeView/>}/>
         </Route>
-        <Route exact path="/ejecutivo">
-          <Layout children={<ExecutiveView/>}/>
-        </Route>
-        <Route exact path="/legislativo">
-          <Layout children={<LegislativeView/>}/>
-        </Route>
-        <Route exact path="/legislativo/senado">
-          <Layout children={<LegislativeSenatorsView/>}/>
-        </Route>
-        <Route exact path="/legislativo/camara/integrantes">
+        <Route exact path="/integrantes">
           <Layout children={<LegislativeDeputiesView/>}/>
         </Route>
-        <Route exact path="/legislativo/camara/integrante/:id">
+        <Route exact path="/integrante/:id">
           <Layout children={<LegislativeDeputyDetailsView/>}/>
         </Route>
-        <Route exact path="/legislativo/camara/votaciones/:year?/:month?">
+        <Route exact path="/votaciones/:year?/:month?">
           <Layout children={<LegislativeDeputiesVotingView/>}/>
         </Route>
-        <Route exact path="/legislativo/camara/votacion/:year/:id">
+        <Route exact path="/votacion/:year/:id">
           <Layout children={<LegislativeDeputiesVotingDetailsView/>}/>
-        </Route>
-        <Route exact path="/judicial">
-          <Layout children={<JudiciaryView/>}/>
         </Route>
         <Redirect from="*" to="/inicio"/>
       </Switch>

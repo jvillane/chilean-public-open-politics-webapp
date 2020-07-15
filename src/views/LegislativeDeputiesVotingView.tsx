@@ -19,7 +19,7 @@ export const LegislativeDeputiesVotingView: React.FC = () => {
   useEffect(() => {
     if(year === undefined || month === undefined) {
       const today = moment();
-      history.replace(`/legislativo/camara/votaciones/${today.get('year')}/${today.get('month')}`)
+      history.replace(`/votaciones/${today.get('year')}/${today.get('month')}`)
     } else {
       setDate(moment({year: +year, month: +month, day: 1}));
     }
@@ -30,7 +30,7 @@ export const LegislativeDeputiesVotingView: React.FC = () => {
     <Container className="text-black text-center py-5">
       <Grid item md={10} lg={8} className="mx-auto pb-4">
         <h2 className="display-3 px-4 font-weight-bold">
-          Poder Legislativo - Diputad@s - Votaciones
+          Votaciones
         </h2>
         <p className="font-size-xl mt-3 mb-0 text-black-50">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam illo incidunt quam quasi. Aliquid beatae
@@ -43,14 +43,9 @@ export const LegislativeDeputiesVotingView: React.FC = () => {
           <Card>
             <CardHeader title="Filtros"/>
             <CardContent>
-              <DatePicker
-                views={["year", "month"]}
-                label="Año - Mes"
-                minDate={new Date("2002-03-02")}
-                maxDate={new Date()}
-                value={date}
-                onChange={date => setDate(date as Moment)}
-              />
+              <DatePicker views={["year", "month"]} label="Año - Mes"
+                minDate={new Date("2018-04-02")} maxDate={new Date()}
+                value={date} onChange={date => setDate(date as Moment)}/>
             </CardContent>
           </Card>
         </Grid>

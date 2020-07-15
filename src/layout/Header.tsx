@@ -6,11 +6,10 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {Button, Collapse, Container, List, ListItem} from '@material-ui/core';
 
 import projectLogo from '../assets/images/react.svg';
-import {NavLink, useHistory} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 export const Header: React.FC = () => {
   const [collapse, setCollapse] = useState(false);
-  const history = useHistory();
   const toggle = () => setCollapse(!collapse);
 
   return (
@@ -22,11 +21,11 @@ export const Header: React.FC = () => {
             <div className="app-nav-logo">
               <NavLink
                 to="/"
-                title="Open Data Chile - Política"
+                title="Open Data Chile - Diputados"
                 className="app-nav-logo app-nav-logo--dark">
                 <div className="app-nav-logo--icon shadow-second-sm bg-deep-sky border-0">
                   <img
-                    alt="Open Data Chile - Política"
+                    alt="Open Data Chile - Diputados"
                     src={projectLogo}
                   />
                 </div>
@@ -40,138 +39,23 @@ export const Header: React.FC = () => {
               <ul className="d-flex nav nav-neutral-first justify-content-center">
                 <li className="justify-content-center">
                   <NavLink
-                    to="/ejecutivo"
+                    to="/integrantes"
                     className="font-weight-bold rounded-sm px-3">
-                    Ejecutivo
-                    <span className="opacity-5 dropdown-arrow">
-                    <FontAwesomeIcon icon={['fas', 'angle-down']}/>
-                  </span>
+                    Integrantes
                   </NavLink>
-                  <div className="submenu-dropdown submenu-dropdown--md">
-                    <div className="shadow-lg w-100 bg-deep-sky p-4 rounded">
-                      <div className="px-4 text-uppercase pb-2 text-white font-weight-bold font-size-sm">
-                        Gobierno
-                      </div>
-                      <List component="div" className="nav-pills nav-transparent nav-pills-rounded flex-column">
-                        <ListItem
-                          button
-                          className="px-4 text-white-50 d-flex align-items-center">
-                          <span>Presidencia</span>
-                          <FontAwesomeIcon
-                            icon={['fas', 'angle-right']}
-                            className="opacity-6 ml-auto"
-                          />
-                        </ListItem>
-                        <ListItem
-                          button
-                          onClick={() => {
-                          }}
-                          className="px-4 d-flex text-white-50 align-items-center">
-                          <span>Ministerios</span>
-                          <FontAwesomeIcon
-                            icon={['fas', 'angle-right']}
-                            className="opacity-6 ml-auto"
-                          />
-                        </ListItem>
-                      </List>
-                      <div className="px-4 text-uppercase pb-2 text-white font-weight-bold font-size-sm">
-                        Municipalidades
-                      </div>
-                      <List component="div" className="nav-pills nav-transparent nav-pills-rounded flex-column">
-                        <ListItem
-                          button
-                          className="px-4 text-white-50 d-flex align-items-center">
-                          <span>Alcaldes</span>
-                          <FontAwesomeIcon
-                            icon={['fas', 'angle-right']}
-                            className="opacity-6 ml-auto"
-                          />
-                        </ListItem>
-                        <ListItem
-                          button
-                          onClick={() => {
-                          }}
-                          className="px-4 d-flex text-white-50 align-items-center">
-                          <span>Consejales</span>
-                          <FontAwesomeIcon
-                            icon={['fas', 'angle-right']}
-                            className="opacity-6 ml-auto"
-                          />
-                        </ListItem>
-                      </List>
-                    </div>
-                  </div>
                 </li>
                 <li className="justify-content-center">
                   <NavLink
-                    to="/legislativo"
+                    to="/votaciones"
                     className="font-weight-bold rounded-sm px-3">
-                    Legislativo
-                    <span className="opacity-5 dropdown-arrow">
-                    <FontAwesomeIcon icon={['fas', 'angle-down']}/>
-                  </span>
+                    Votaciones
                   </NavLink>
-                  <div className="submenu-dropdown submenu-dropdown--md">
-                    <div className="shadow-lg w-100 bg-deep-sky p-4 rounded">
-                      <div className="px-4 text-uppercase pb-2 text-white font-weight-bold font-size-sm">
-                        Diputad@s
-                      </div>
-                      <List component="div" className="nav-pills nav-transparent nav-pills-rounded flex-column">
-                        <ListItem
-                          button
-                          onClick={() => history.push('/legislativo/camara/integrantes')}
-                          className="px-4 text-white-50 d-flex align-items-center">
-                          <span>Integrantes</span>
-                          <FontAwesomeIcon
-                            icon={['fas', 'angle-right']}
-                            className="opacity-6 ml-auto"
-                          />
-                        </ListItem>
-                        <ListItem
-                          button
-                          onClick={() => history.push('/legislativo/camara/votaciones')}
-                          className="px-4 text-white-50 d-flex align-items-center">
-                          <span>Votaciones</span>
-                          <FontAwesomeIcon
-                            icon={['fas', 'angle-right']}
-                            className="opacity-6 ml-auto"
-                          />
-                        </ListItem>
-                      </List>
-                      <div className="px-4 text-uppercase pb-2 text-white font-weight-bold font-size-sm">
-                        Senador@s
-                      </div>
-                      <List component="div" className="nav-pills nav-transparent nav-pills-rounded flex-column">
-                        <ListItem
-                          button
-                          onClick={() => history.push('/legislativo/senado/integrantes')}
-                          className="px-4 text-white-50 d-flex align-items-center">
-                          <span>Integrantes</span>
-                          <FontAwesomeIcon
-                            icon={['fas', 'angle-right']}
-                            className="opacity-6 ml-auto"
-                          />
-                        </ListItem>
-                        <ListItem
-                          button
-                          onClick={() => history.push('/legislativo/senado/votaciones')}
-                          className="px-4 text-white-50 d-flex align-items-center">
-                          <span>Votaciones</span>
-                          <FontAwesomeIcon
-                            icon={['fas', 'angle-right']}
-                            className="opacity-6 ml-auto"
-                          />
-                        </ListItem>
-                      </List>
-                    </div>
-                  </div>
                 </li>
                 <li className="justify-content-center">
-                  <NavLink
-                    to="/judicial"
+                  <a href="http://open-data.cl" target="_blank" rel="noopener noreferrer"
                     className="font-weight-bold rounded-sm px-3">
-                    Judicial
-                  </NavLink>
+                    Quienes somos
+                  </a>
                 </li>
               </ul>
             </div>
