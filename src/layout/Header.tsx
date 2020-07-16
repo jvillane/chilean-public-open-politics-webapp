@@ -4,8 +4,6 @@ import clsx from 'clsx';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {Button, Collapse, Container, List, ListItem} from '@material-ui/core';
-
-import projectLogo from '../assets/images/react.svg';
 import {NavLink} from 'react-router-dom';
 
 export const Header: React.FC = () => {

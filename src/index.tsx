@@ -7,7 +7,7 @@ import ReactGA from 'react-ga';
 import {BrowserRouter as Router} from "react-router-dom";
 import {BASE_URL} from "./config";
 import 'moment/locale/es'
-import moment from "moment";
+import moment from "moment-timezone";
 import DateFnsUtils from "@date-io/moment";
 import {MuiPickersUtilsProvider} from "@material-ui/pickers";
 

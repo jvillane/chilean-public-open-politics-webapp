@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const DeputiesVotingMini: React.FC<Props> = ({id, voting}) => {
-  const date = moment(voting.Fecha);
+  const date = moment(voting.Fecha).tz('America/Santiago');
   const history = useHistory();
 
   return (
@@ -20,7 +20,7 @@ export const DeputiesVotingMini: React.FC<Props> = ({id, voting}) => {
           onClick={() => history.push(`/votacion/${date.get('year')}/${id}`)}>
       <div className="text-center">
         <div>
-          <b>{date.format('DD-MMM-YYYY')}</b> <small>({date.format('HH:mm')})</small>
+          <b>{date.format('DD-MMM-YYYY')}</b> <small>({date.format('HH:mm a')})</small>
           <span className="text-black-50 d-block">{voting.Tipo.Valor}</span>
         </div>
       </div>

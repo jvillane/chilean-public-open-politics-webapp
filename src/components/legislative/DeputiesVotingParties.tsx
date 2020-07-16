@@ -18,10 +18,8 @@ export const DeputiesVotingParties: React.FC<Props> = ({voting}) => {
         getParties()
           .then(() => {
             const partiesDetails: { [id: string]: PartyDetails } = {};
-            let  i = 1;
             for (const deputyId in voting.Votos) {
               const deputy = deputies[deputyId];
-              console.log(i++, deputy);
               for (const militancy of deputy.Militancia) {
                 if (moment(voting.Fecha).isBetween(moment(militancy.Inicio), moment(militancy.Termino), 'day', '[]')) {
                   if (partiesDetails[militancy.Id] === undefined) {
@@ -33,7 +31,6 @@ export const DeputiesVotingParties: React.FC<Props> = ({voting}) => {
                       }
                     };
                   }
-                  console.log(militancy.Alias);
                   partiesDetails[militancy.Id].deputies[deputyId] = deputy;
                 }
               }
