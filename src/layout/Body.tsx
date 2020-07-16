@@ -5,7 +5,7 @@ export const Body: React.FC = ({children}) => {
     <main className="hero-wrapper--content">
       <div className="bg-composed-wrapper--bg bg-white opacity-5"/>
       <div className="bg-composed-wrapper--content">
-        <div className="py-5">
+        <div className="py-3">
           {children}
         </div>
       </div>

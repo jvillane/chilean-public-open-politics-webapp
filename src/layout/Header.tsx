@@ -23,15 +23,9 @@ export const Header: React.FC = () => {
                 to="/"
                 title="Open Data Chile - Diputados"
                 className="app-nav-logo app-nav-logo--dark">
-                <div className="app-nav-logo--icon shadow-second-sm bg-deep-sky border-0">
-                  <img
-                    alt="Open Data Chile - Diputados"
-                    src={projectLogo}
-                  />
-                </div>
                 <div className="app-nav-logo--text">
-                  <span>open-data</span>
-                  <b>Política</b>
+                  <span>diputados</span>
+                  <b>open-data</b>
                 </div>
               </NavLink>
             </div>

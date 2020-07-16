@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Accordion, AccordionDetails, AccordionSummary, Box, Card, CardContent, Grid} from "@material-ui/core";
+import {Accordion, AccordionDetails, AccordionSummary, Box, Button, CardContent, Grid, Hidden} from "@material-ui/core";
 import {Diputados, Votacion} from "../../services/deputies.model";
 import Avatar from "react-avatar";
 import CountUp from "react-countup";
@@ -9,6 +9,7 @@ import {Party} from "../../services/deputies.service";
 import {getMedia, getMediadetails} from "../../services/profile.service";
 import {BASE_URL} from "../../config";
 import {DeputyMini} from "./DeputyMini";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export interface PartyDetails {
   deputies: Diputados
@@ -20,13 +21,13 @@ interface Props {
   voting: Votacion
 }
 
-type VoteType = 'Afirmativo' | 'En Contra' | 'Abstencion' | 'Dispensado';
+type VoteType = 'A Favor' | 'En Contra' | 'Abstencion' | 'Dispensado';
 
 export const DeputiesVotingParty: React.FC<Props> = ({partyDetails, voting}) => {
 
   const [deputiesVotes, setDeputiesVotes] = useState<{ [key in VoteType]: Diputados }>();
   const [expandedAccordion, setExpandedAccordion] = useState<{ [key in VoteType]: boolean }>({
-    Afirmativo: false,
+    'A Favor': false,
     'En Contra': false,
     Abstencion: false,
     Dispensado: false
@@ -36,7 +37,7 @@ export const DeputiesVotingParty: React.FC<Props> = ({partyDetails, voting}) => 
     getMedia()
       .then(() => {
         const deputiesVotes: { [key in VoteType]: Diputados } = {
-          Afirmativo: {},
+          'A Favor': {},
           'En Contra': {},
           Abstencion: {},
           Dispensado: {}
@@ -48,7 +49,7 @@ export const DeputiesVotingParty: React.FC<Props> = ({partyDetails, voting}) => 
               deputiesVotes['En Contra'][deputyId] = partyDetails.deputies[deputyId];
               break;
             case '1':
-              deputiesVotes.Afirmativo[deputyId] = partyDetails.deputies[deputyId];
+              deputiesVotes['A Favor'][deputyId] = partyDetails.deputies[deputyId];
               break;
             case '2':
               deputiesVotes.Abstencion[deputyId] = partyDetails.deputies[deputyId];
@@ -85,10 +86,11 @@ export const DeputiesVotingParty: React.FC<Props> = ({partyDetails, voting}) => 
                 </div>
               </Grid>
             </CardContent>
-            {(['Afirmativo', 'En Contra', 'Abstencion', 'Dispensado'] as VoteType[]).map((vote: VoteType) => {
+            {(['A Favor', 'En Contra', 'Abstencion', 'Dispensado'] as VoteType[]).map((vote: VoteType) => {
               const voteNumber = Object.keys(deputiesVotes[vote]).length;
               if (voteNumber > 0) {
-                const color = vote === "Afirmativo" ? "success" : vote === "En Contra" ? "danger" : vote === "Abstencion" ? "warning" : "dark";
+                const color = vote === "A Favor" ? "success" : vote === "En Contra" ? "danger" : vote === "Abstencion" ? "warning" : "dark";
+                const icon = vote === "A Favor" ? "check" : vote === "En Contra" ? "times" : vote === "Abstencion" ? "ban" : "ban";
                 return (
                   <Accordion key={`${partyDetails.party.Alias}_${vote}`}
                              className="political-party-votation-detail my-0"
@@ -98,32 +100,43 @@ export const DeputiesVotingParty: React.FC<Props> = ({partyDetails, voting}) => 
                              }>
                     <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                       <div className="title">
-                        <div className="font-size-sm text-black-50">{vote}</div>
-                        <Card className="border-0 shadow-none my-1 overflow-visible">
-                          <div className={`card-indicator bg-${color}`}/>
-                          <div className="display-5 line-height-1 font-weight-bold ml-3">
-                            <CountUp start={0} end={voteNumber} duration={4} delay={2} separator="" decimals={0}
-                                     decimal=","/>
+                        <Grid container direction="row" justify="flex-start" alignItems="center">
+                          <Button size="small" variant="text"
+                                  className={`btn-animated-icon d-30 btn-pill p-0 btn-icon btn-${color}`}>
+                            <span className="btn-wrapper--icon">
+                              <FontAwesomeIcon icon={['fas', icon]}/>
+                            </span>
+                          </Button>
+                          <Hidden mdDown>
+                            <div className="icon-result-text">
+                              <Grid container direction="column" justify="center" alignItems="center">
+                                <div className="font-size-sm text-black-50">{vote}</div>
+                                <div className={`display-4 line-height-1 font-weight-bold text-${color}`}>
+                                  <CountUp start={0} end={voteNumber} duration={4} delay={2} separator="" decimals={0}
+                                           decimal=","/>
+                                </div>
+                              </Grid>
+                            </div>
+                          </Hidden>
+                          <div className="avatars pl-3">
+                            <AvatarGroup max={6} hidden={expandedAccordion[vote]}>
+                              {Object.values(deputiesVotes[vote]).map(deputy => {
+                                const mediaDetails = getMediadetails(deputy.Id);
+                                const name = `${deputy.Nombres} ${deputy.ApellidoPaterno} ${deputy.ApellidoMaterno}`;
+                                if (mediaDetails?.avatar) {
+                                  return (
+                                    <Avatar key={`${deputy.Id}`} round className="d-50" alt={name}
+                                            src={`${BASE_URL}/img/avatar/${mediaDetails.avatar}`}/>
+                                  )
+                                } else {
+                                  return (
+                                    <Avatar key={`${deputy.Id}`} round className="d-40" alt={name}/>
+                                  )
+                                }
+                              })}
+                            </AvatarGroup>
                           </div>
-                        </Card>
-                      </div>
-                      <div className="avatars">
-                        <AvatarGroup max={11} hidden={expandedAccordion[vote]}>
-                          {Object.values(deputiesVotes[vote]).map(deputy => {
-                            const mediaDetails = getMediadetails(deputy.Id);
-                            const name = `${deputy.Nombres} ${deputy.ApellidoPaterno} ${deputy.ApellidoMaterno}`;
-                            if (mediaDetails?.avatar) {
-                              return (
-                                <Avatar key={`${deputy.Id}`} round className="d-40" alt={name}
-                                        src={`${BASE_URL}/img/avatar/${mediaDetails.avatar}`}/>
-                              )
-                            } else {
-                              return (
-                                <Avatar key={`${deputy.Id}`} round className="d-40" alt={name}/>
-                              )
-                            }
-                          })}
-                        </AvatarGroup>
+                        </Grid>
                       </div>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -131,7 +144,7 @@ export const DeputiesVotingParty: React.FC<Props> = ({partyDetails, voting}) => 
                         {Object.keys(deputiesVotes[vote]).map(deputyId => {
                           const deputy = deputiesVotes[vote][deputyId];
                           return (
-                            <Grid key={`deputy_${deputyId}`} item md={4} className="text-center">
+                            <Grid key={`deputy_${deputyId}`} item xs={1} md={4} lg={3} className="text-center">
                               <DeputyMini id={deputyId} deputy={deputy}/>
                             </Grid>
                           )

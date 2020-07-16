@@ -8,7 +8,7 @@ import {
   faAngleRight,
   faBan,
   faCheck,
-  faFemale,
+  faFemale, faHandPaper,
   faMale,
   faMinusCircle,
   fas,
@@ -29,6 +29,7 @@ library.add(
   faAngleRight,
   faBan,
   faCheck,
+  faHandPaper,
   faFemale,
   faMale,
   faMinusCircle,
@@ -60,6 +61,7 @@ function App() {
         <Route exact path="/votacion/:year/:id">
           <Layout children={<LegislativeDeputiesVotingDetailsView/>}/>
         </Route>
+        <Redirect from="/10afp" to="/votacion/2020/33634"/>
         <Redirect from="*" to="/inicio"/>
       </Switch>
     </ThemeProvider>
