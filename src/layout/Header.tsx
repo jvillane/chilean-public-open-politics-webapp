@@ -45,7 +45,7 @@ export const Header: React.FC = () => {
                 </li>
                 <li className="justify-content-center">
                   <a href="http://open-data.cl" target="_blank" rel="noopener noreferrer"
-                    className="font-weight-bold rounded-sm px-3">
+                     className="font-weight-bold rounded-sm px-3">
                     Quienes somos
                   </a>
                 </li>
@@ -85,9 +85,9 @@ export const Header: React.FC = () => {
                       <ListItem
                         button
                         component={NavLink}
-                        to="/ejecutivo"
+                        to="/integrantes"
                         className="px-4 d-flex align-items-center">
-                        <span>Ejecutivo</span>
+                        <span>Integrantes</span>
                         <FontAwesomeIcon
                           icon={['fas', 'angle-right']}
                           className="opacity-6 ml-auto"
@@ -96,25 +96,22 @@ export const Header: React.FC = () => {
                       <ListItem
                         button
                         component={NavLink}
-                        to="/legislativo"
+                        to="/votaciones"
                         className="px-4 d-flex align-items-center">
-                        <span>Legislativo</span>
+                        <span>Votaciones</span>
                         <FontAwesomeIcon
                           icon={['fas', 'angle-right']}
                           className="opacity-6 ml-auto"
                         />
                       </ListItem>
-                      <ListItem
-                        button
-                        component={NavLink}
-                        to="/judicial"
-                        className="px-4 d-flex align-items-center">
-                        <span>Judicial</span>
-                        <FontAwesomeIcon
-                          icon={['fas', 'angle-right']}
-                          className="opacity-6 ml-auto"
-                        />
-                      </ListItem>
+                      <a href="http://open-data.cl" target="_blank" rel="noopener noreferrer">
+                        <ListItem
+                          button
+                          className="px-4 d-flex align-items-center">
+                          <span>Quienes somos</span>
+                          <FontAwesomeIcon icon={['fas', 'angle-right']} className="opacity-6 ml-auto"/>
+                        </ListItem>
+                      </a>
                     </List>
                   </div>
                 </div>
