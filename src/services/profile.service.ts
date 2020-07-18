@@ -20,8 +20,8 @@ export const getMediadetails = (id: string): MediaDetails | undefined => {
   return _media[id];
 }
 
-export const getPublicFigurePartyId = (pf: FiguraPublica, votingDate: string): string | undefined => {
-  const votingMoment = moment(votingDate);
+export const getPublicFigurePartyId = (pf: FiguraPublica, votingDate?: string): string | undefined => {
+  const votingMoment = votingDate ? moment(votingDate) : moment();
   if (pf.Militancias) {
     for (const militancy of pf.Militancias) {
       if (militancy.Desde && militancy.Hasta) {

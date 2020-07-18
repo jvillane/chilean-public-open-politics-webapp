@@ -1,5 +1,5 @@
 import axios from "axios";
-import {Partidos} from "./parties.model";
+import {Partido, Partidos} from "./parties.model";
 
 let _parties: Partidos;
 
@@ -9,4 +9,11 @@ export const getParties = async (): Promise<Partidos> => {
     _parties = response.data;
   }
   return _parties;
+}
+
+export const getParty = async (id: string): Promise<Partido> => {
+  if (_parties === undefined) {
+    await getParties();
+  }
+  return _parties[id];
 }

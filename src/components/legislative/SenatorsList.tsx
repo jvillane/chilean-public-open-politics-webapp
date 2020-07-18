@@ -18,7 +18,7 @@ export const SenatorsList: React.FC = () => {
       {senators && Object.keys(senators).map(id => {
         return (
           <Grid item xs={6} sm={4} xl={3} key={`senator_${id}`}>
-            <ProfileMini id={senators[id].FiguraPublicaId} link={`/senadores/integrante/${id}`}/>
+            <ProfileMini withPartyName id={senators[id].FiguraPublicaId} link={`/senadores/integrante/${id}`}/>
           </Grid>
         )
       })}
