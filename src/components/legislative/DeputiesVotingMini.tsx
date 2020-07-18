@@ -1,10 +1,11 @@
 import React from "react";
-import {Card, Grid, Tooltip} from "@material-ui/core";
+import {Button, Card, Grid, Tooltip, Typography} from "@material-ui/core";
 import {Votacion} from "../../services/deputies.model";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import ClampLines from "react-clamp-lines/lib";
 import {useHistory} from "react-router";
+import CountUp from "react-countup";
 
 interface Props {
   id: string
@@ -21,13 +22,13 @@ export const DeputiesVotingMini: React.FC<Props> = ({id, voting}) => {
       <div className="text-center">
         <div>
           <b>{date.format('DD-MMM-YYYY')}</b> <small>({date.format('HH:mm a')})</small>
-          <span className="text-black-50 d-block">{voting.Tipo.Valor}</span>
+          <Typography className="text-info" variant="subtitle2">{voting.Tipo.Valor}</Typography>
         </div>
       </div>
       <div className="divider mx-auto my-3 w-100"/>
       {voting.ProyectoLeyNombre && (
         <Tooltip title={voting.ProyectoLeyNombre} arrow interactive>
-          <div className="text-center">
+          <div className="text-center text-black-50">
             <ClampLines text={voting.ProyectoLeyNombre} id={`desc_${id}`} buttons={false}
                         lines={4} moreText="Ver más" lessText="Ver menos"/>
           </div>
@@ -35,45 +36,46 @@ export const DeputiesVotingMini: React.FC<Props> = ({id, voting}) => {
       )}
       {!voting.ProyectoLeyNombre && (
         <Tooltip title={voting.Descripcion} arrow interactive>
-          <div className="text-center">
+          <div className="text-center text-black-50">
             <ClampLines text={voting.Descripcion} id={`desc_${id}`} buttons={false}
                         lines={4} moreText="Ver más" lessText="Ver menos"/>
           </div>
         </Tooltip>
       )}
       <div className="divider mx-auto my-3 w-100"/>
-      {voting.Resultado && (
-        <>
-          <div className="text-center">
-            <p>{voting.Resultado.Valor}</p>
-          </div>
-          <div className="divider mx-auto my-3 w-100"/>
-        </>
-      )}
       <Grid container spacing={3} className="text-center">
         <Grid item sm={4} className="text-center">
-          <div className="text-black-50">
-            <div className="badge rounded-circle badge-neutral-success text-success d-30 btn-icon p-0">
-              <FontAwesomeIcon icon={['fas', 'check']}/>
-            </div>
+          <Button size="small" variant="text"
+                  className="btn-animated-icon d-30 btn-pill p-0 mb-2 btn-icon btn-success">
+                        <span className="btn-wrapper--icon">
+                          <FontAwesomeIcon icon={['fas', 'check']}/>
+                        </span>
+          </Button>
+          <div className="display-5 line-height-sm font-weight-light text-success">
+            <CountUp start={0} end={voting.Total.Si} duration={4} delay={2} separator="" decimals={0} decimal=","/>
           </div>
-          <b className="font-size-lg">{voting.Total.Si}</b>
         </Grid>
         <Grid item sm={4} className="text-center">
-          <div className="text-black-50">
-            <div className="badge rounded-circle badge-neutral-danger text-danger d-30 btn-icon p-0">
-              <FontAwesomeIcon icon={['fas', 'times']}/>
-            </div>
+          <Button size="small" variant="text"
+                  className="btn-animated-icon d-30 btn-pill p-0 mb-2 btn-icon btn-danger">
+                        <span className="btn-wrapper--icon">
+                          <FontAwesomeIcon icon={['fas', 'times']}/>
+                        </span>
+          </Button>
+          <div className="display-5 line-height-sm font-weight-light text-danger">
+            <CountUp start={0} end={voting.Total.No} duration={4} delay={2} separator="" decimals={0} decimal=","/>
           </div>
-          <b className="font-size-lg">{voting.Total.No}</b>
         </Grid>
         <Grid item sm={4} className="text-center">
-          <div className="text-black-50">
-            <div className="badge rounded-circle badge-neutral-second text-black-50 d-30 btn-icon p-0">
-              <FontAwesomeIcon icon={['fas', 'minus-circle']}/>
-            </div>
+          <Button size="small" variant="text"
+                  className="btn-animated-icon d-30 btn-pill p-0 mb-2 btn-icon btn-warning">
+                        <span className="btn-wrapper--icon">
+                          <FontAwesomeIcon icon={['fas', 'hand-paper']}/>
+                        </span>
+          </Button>
+          <div className="display-5 line-height-sm font-weight-light text-warning">
+            <CountUp start={0} end={voting.Total.Abstencion} duration={4} delay={2} separator="" decimals={0} decimal=","/>
           </div>
-          <b className="font-size-lg">{voting.Total.Abstencion}</b>
         </Grid>
       </Grid>
     </Card>
