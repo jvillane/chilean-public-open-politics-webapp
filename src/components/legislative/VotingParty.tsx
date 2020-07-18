@@ -101,7 +101,7 @@ export const VotingParty: React.FC<VotingPartyProps> = ({party, votes, type}) =>
                             <div className="icon-result-text">
                               <Grid container direction="column" justify="center" alignItems="center">
                                 <div className="font-size-sm text-black-50">{VT_LABEL[vote]}</div>
-                                <div className={`display-4 line-height-1 font-weight-bold ${VT_TEXT}`}>
+                                <div className={`display-4 line-height-1 font-weight-bold ${VT_TEXT[vote]}`}>
                                   <CountUp start={0} end={voteNumber} duration={4} delay={2} separator="" decimals={0}
                                            decimal=","/>
                                 </div>
