@@ -46,7 +46,7 @@ function App() {
   return (
     <ThemeProvider theme={MuiTheme}>
       <Switch>
-        <Route exact path="/inicio">
+        <Route exact path="/">
           <Layout children={<HomeView/>}/>
         </Route>
         <Route exact path="/integrantes">
@@ -62,7 +62,7 @@ function App() {
           <Layout children={<LegislativeDeputiesVotingDetailsView/>}/>
         </Route>
         <Redirect from="/10afp" to="/votacion/2020/33634"/>
-        <Redirect from="*" to="/inicio"/>
+        <Redirect from="*" to="/"/>
       </Switch>
     </ThemeProvider>
   );

@@ -23,7 +23,7 @@ export const Header: React.FC = () => {
                 className="app-nav-logo app-nav-logo--dark">
                 <div className="app-nav-logo--text">
                   <span>diputados</span>
-                  <b>open-data</b>
+                  <b>open-data.cl</b>
                 </div>
               </NavLink>
             </div>

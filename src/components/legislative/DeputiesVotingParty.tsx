@@ -90,7 +90,7 @@ export const DeputiesVotingParty: React.FC<Props> = ({partyDetails, voting}) => 
               const voteNumber = Object.keys(deputiesVotes[vote]).length;
               if (voteNumber > 0) {
                 const color = vote === "A Favor" ? "success" : vote === "En Contra" ? "danger" : vote === "Abstencion" ? "warning" : "dark";
-                const icon = vote === "A Favor" ? "check" : vote === "En Contra" ? "times" : vote === "Abstencion" ? "ban" : "ban";
+                const icon = vote === "A Favor" ? "check" : vote === "En Contra" ? "times" : vote === "Abstencion" ? "hand-paper" : "ban";
                 return (
                   <Accordion key={`${partyDetails.party.Alias}_${vote}`}
                              className="political-party-votation-detail my-0"

@@ -1,3 +1,8 @@
+export interface IdValor {
+  Id: string
+  Valor: string
+}
+
 export interface Periodo {
   Nombre: string
   Inicio: string
@@ -32,10 +37,7 @@ export interface Diputados {
 
 export interface Asistencia {
   [DiputadoId: string]: {
-    TipoAsistencia: {
-      Id: string
-      Valor: string
-    }
+    TipoAsistencia: IdValor
     Justificacion?: {
       Id: string
       Valor: string
@@ -49,26 +51,19 @@ export interface Sesion {
   Numero: number
   Inicio: string
   Termino: string
-  Tipo: {
-    Id: number
-    Nombre: string
-  }
-  Estado: {
-    Id: number
-    Nombre: string
-  }
+  Tipo: IdValor
+  Estado: IdValor
   Asistencia: Asistencia
 }
 
 export interface Voto {
-  [DiputadoId: string]: {
-    Id: string
-    Valor: string
-  }
+  [DiputadoId: string]: IdValor
 }
 
 export interface Votacion {
   Descripcion: string
+  BoletinNumero?: string
+  ProyectoLeyId?: string
   Fecha: string
   Total: {
     Si: number
@@ -76,19 +71,12 @@ export interface Votacion {
     Abstencion: number
     Dispensado: number
   }
-  Quorum: {
-    Id: number
-    Valor: string
-  }
-  Resultado?: {
-    Id: number
-    Valor: string
-  }
-  Tipo: {
-    Id: number
-    Valor: string
-  }
+  Quorum: IdValor
+  Resultado?: IdValor
+  Tipo: IdValor
   Votos: Voto
+  ProyectoLeyNombre?: string
+  Articulo?: string
 }
 
 export interface Sesiones {
@@ -107,4 +95,51 @@ export interface Votaciones {
   Votaciones: {
     [VotacionId: string]: Votacion
   }
+}
+
+export interface ProyectoLeyAutorDiputado {
+  Id: string
+  Nombre: string
+  ApellidoPaterno: string
+  ApellidoMaterno: string
+}
+
+export interface ProyectoLeyAutor {
+  Orden: string
+  Diputado: ProyectoLeyAutorDiputado
+}
+
+export interface ProyectoLeyVotacion  {
+  Descripcion: string
+  Fecha: string
+  TotalSi: string
+  TotalNo: string
+  TotalAbstencion: string
+  TotalDispensado: string
+  Quorum: IdValor
+  Resultado: IdValor
+  Tipo: IdValor
+  TipoVotacion: IdValor
+  Articulo: string
+  TramiteConstitucional: IdValor
+  TramiteReglamentario: IdValor
+}
+
+export interface ProyectoLey {
+  Id: string
+  NumeroBoletin: string
+  Nombre: string
+  FechaIngreso: string
+  TipoIniciativa: IdValor
+  CamaraOrigen: IdValor
+  Autores: ProyectoLeyAutor[]
+  Votaciones: {
+    [id: string]: ProyectoLeyVotacion
+  }
+  Materias: IdValor[]
+  Admisible: boolean
+}
+
+export interface ProyectosLey {
+  [NumeroBoletin: string]: ProyectoLey
 }

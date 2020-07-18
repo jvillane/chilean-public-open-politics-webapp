@@ -29,7 +29,7 @@ export const LegislativeDeputiesVotingDetailsView: React.FC = () => {
       <Card className="card-box mb-4">
         <CardContent>
           <Grid container spacing={3}>
-            <Grid item md={6} lg={4}>
+            <Grid item md={5} lg={4}>
               {voting && (
                 <>
                   <div className="d-flex align-items-center justify-content-between">
@@ -52,25 +52,53 @@ export const LegislativeDeputiesVotingDetailsView: React.FC = () => {
                       {voting.Tipo.Valor}
                     </div>
                   </div>
-                  <div className="divider my-3"/>
                   {voting.Resultado && (
-                    <div>
-                      <div className="d-flex align-items-center justify-content-between">
-                        <div>
-                          <b>Resultado</b>
-                        </div>
-                        <div className="text-black-50">
-                          {voting.Resultado.Valor}
+                    <>
+                      <div className="divider my-3"/>
+                      <div>
+                        <div className="d-flex align-items-center justify-content-between">
+                          <div>
+                            <b>Resultado</b>
+                          </div>
+                          <div className="text-black-50">
+                            {voting.Resultado.Valor}
+                          </div>
                         </div>
                       </div>
-                      <Hidden smUp><Divider className="mt-3 mb-1"/></Hidden>
-                    </div>
+                    </>
+                  )}
+                  {voting.BoletinNumero && (
+                    <>
+                      <div className="divider my-3"/>
+                      <div>
+                        <div className="d-flex align-items-center justify-content-between">
+                          <div>
+                            <b>Boletín Nº</b>
+                          </div>
+                          <div className="text-black-50">
+                            {voting.BoletinNumero}
+                          </div>
+                        </div>
+                      </div>
+                    </>
                   )}
                 </>
               )}
             </Grid>
-            <Grid item md={6} lg={8}>
-              {voting && (
+            <Grid item md={7} lg={8}>
+              {voting && voting.ProyectoLeyNombre && (
+                <Grid container direction="column" justify="flex-start" alignItems="flex-start">
+                  <div>
+                    <b>Proyecto de Ley</b>
+                    <div className="text-black-50 mt-2">{voting.ProyectoLeyNombre}</div>
+                  </div>
+                  <div className="mt-4">
+                    <b>Artículo</b>
+                    <div className="text-black-50 mt-2">{voting.Articulo}</div>
+                  </div>
+                </Grid>
+              )}
+              {voting && !voting.ProyectoLeyNombre && (
                 <div className="d-flex align-items-center justify-content-between">
                   <div>
                     <b>Descripción</b>
@@ -99,7 +127,7 @@ export const LegislativeDeputiesVotingDetailsView: React.FC = () => {
                     </Button>
                     <span className="font-size-md text-black-50 pl-3">A Favor</span>
                   </div>
-                  <div className="text-success">
+                  <div className="display-4 line-height-1 font-weight-bold text-success">
                     <CountUp start={0} end={voting.Total.Si} duration={4} delay={2} separator="" decimals={0}
                              decimal=","/>
                   </div>
@@ -117,7 +145,7 @@ export const LegislativeDeputiesVotingDetailsView: React.FC = () => {
                     </Button>
                     <span className="font-size-md text-black-50 pl-3">En Contra</span>
                   </div>
-                  <div className="text-danger">
+                  <div className="display-4 line-height-1 font-weight-bold text-danger">
                     <CountUp start={0} end={voting.Total.No} duration={4} delay={2} separator="" decimals={0}
                              decimal=","/>
                   </div>
@@ -137,7 +165,7 @@ export const LegislativeDeputiesVotingDetailsView: React.FC = () => {
                     </Button>
                     <span className="font-size-md text-black-50 pl-3">Abstención</span>
                   </div>
-                  <div className="text-warning">
+                  <div className="display-4 line-height-1 font-weight-bold text-warning">
                     <CountUp start={0} end={voting.Total.Abstencion} duration={4} delay={2} separator="" decimals={0}
                              decimal=","/>
                   </div>
@@ -154,7 +182,7 @@ export const LegislativeDeputiesVotingDetailsView: React.FC = () => {
                     </Button>
                     <span className="font-size-md text-black-50 pl-3">Dispensado</span>
                   </div>
-                  <div className="text-dark">
+                  <div className="display-4 line-height-1 font-weight-bold text-dark">
                     <CountUp start={0} end={voting.Total.Dispensado} duration={4} delay={2} separator="" decimals={0}
                              decimal=","/>
                   </div>

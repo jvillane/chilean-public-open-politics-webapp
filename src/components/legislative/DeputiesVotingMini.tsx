@@ -25,12 +25,22 @@ export const DeputiesVotingMini: React.FC<Props> = ({id, voting}) => {
         </div>
       </div>
       <div className="divider mx-auto my-3 w-100"/>
-      <Tooltip title={voting.Descripcion} arrow interactive>
-        <div className="text-center">
-          <ClampLines text={voting.Descripcion} id={`desc_${id}`} buttons={false}
-                      lines={3} moreText="Ver más" lessText="Ver menos"/>
-        </div>
-      </Tooltip>
+      {voting.ProyectoLeyNombre && (
+        <Tooltip title={voting.ProyectoLeyNombre} arrow interactive>
+          <div className="text-center">
+            <ClampLines text={voting.ProyectoLeyNombre} id={`desc_${id}`} buttons={false}
+                        lines={4} moreText="Ver más" lessText="Ver menos"/>
+          </div>
+        </Tooltip>
+      )}
+      {!voting.ProyectoLeyNombre && (
+        <Tooltip title={voting.Descripcion} arrow interactive>
+          <div className="text-center">
+            <ClampLines text={voting.Descripcion} id={`desc_${id}`} buttons={false}
+                        lines={4} moreText="Ver más" lessText="Ver menos"/>
+          </div>
+        </Tooltip>
+      )}
       <div className="divider mx-auto my-3 w-100"/>
       {voting.Resultado && (
         <>
