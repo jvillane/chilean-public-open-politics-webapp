@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 
-import {Button, Card, CardContent, Container, Divider, Grid, Hidden} from '@material-ui/core';
+import {Button, Card, CardContent, Container, Grid, Hidden} from '@material-ui/core';
 import {Votacion} from "../services/deputies.model";
 import {useParams} from "react-router";
 import {getVoting} from "../services/deputies.service";
