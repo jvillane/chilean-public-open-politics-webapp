@@ -23,6 +23,8 @@ import MuiTheme from "./theme";
 import {LegislativeDeputyDetailsView} from "./views/LegislativeDeputyDetailsView";
 import {LegislativeDeputiesVotingView} from "./views/LegislativeDeputiesVotingView";
 import {LegislativeDeputiesVotingDetailsView} from "./views/LegislativeDeputiesVotingDetailsView";
+import {LegislativeSenatorsView} from "./views/LegislativeSenatorsView";
+import {LegislativeSenatorDetailsView} from "./views/LegislativeSenatorDetailsView";
 
 library.add(
   fas,
@@ -49,19 +51,25 @@ function App() {
         <Route exact path="/">
           <Layout children={<HomeView/>}/>
         </Route>
-        <Route exact path="/integrantes">
+        <Route exact path="/diputados/integrantes">
           <Layout children={<LegislativeDeputiesView/>}/>
         </Route>
-        <Route exact path="/integrante/:id">
+        <Route exact path="/senadores/integrantes">
+          <Layout children={<LegislativeSenatorsView/>}/>
+        </Route>
+        <Route exact path="/diputados/integrante/:id">
           <Layout children={<LegislativeDeputyDetailsView/>}/>
         </Route>
-        <Route exact path="/votaciones/:year?/:month?">
+        <Route exact path="/senadores/integrante/:id">
+          <Layout children={<LegislativeSenatorDetailsView/>}/>
+        </Route>
+        <Route exact path="/diputados/votaciones/:year?/:month?">
           <Layout children={<LegislativeDeputiesVotingView/>}/>
         </Route>
-        <Route exact path="/votacion/:year/:id">
+        <Route exact path="/diputados/votacion/:year/:id">
           <Layout children={<LegislativeDeputiesVotingDetailsView/>}/>
         </Route>
-        <Redirect from="/10afp" to="/votacion/2020/33634"/>
+        <Redirect from="/10afp" to="/diputados/votacion/2020/33634"/>
         <Redirect from="*" to="/"/>
       </Switch>
     </ThemeProvider>

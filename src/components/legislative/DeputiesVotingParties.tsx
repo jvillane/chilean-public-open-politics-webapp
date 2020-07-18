@@ -1,56 +1,57 @@
 import React, {useEffect, useState} from "react";
 import {Votacion} from "../../services/deputies.model";
-import {getDeputies, getParties} from "../../services/deputies.service";
-import moment from "moment";
-import {DeputiesVotingParty, PartyDetails} from "./DeputiesVotingParty";
+import {getDeputies} from "../../services/deputies.service";
+import {VotingParty, VotingPartyProps} from "./VotingParty";
+import {getPublicFigurePartyId, getPublicFigures} from "../../services/profile.service";
+import {getParties} from "../../services/parties.service";
+import {getDeputyVotingValue} from "./_legislative.types";
 
 interface Props {
   voting: Votacion
 }
 
 export const DeputiesVotingParties: React.FC<Props> = ({voting}) => {
-  const [state, setState] = useState<PartyDetails[]>();
+  const [state, setState] = useState<VotingPartyProps[]>();
 
   useEffect(() => {
-    //TODO move this logic into a service function
-    getDeputies()
-      .then(deputies => {
-        getParties()
-          .then(() => {
-            const partiesDetails: { [id: string]: PartyDetails } = {};
-            for (const deputyId in voting.Votos) {
-              const deputy = deputies[deputyId];
-              for (const militancy of deputy.Militancia) {
-                if (moment(voting.Fecha).isBetween(moment(militancy.Inicio), moment(militancy.Termino), 'day', '[]')) {
-                  if (partiesDetails[militancy.Id] === undefined) {
-                    partiesDetails[militancy.Id] = {
-                      deputies: {},
-                      party: {
-                        Alias: militancy.Alias,
-                        Nombre: militancy.Nombre
-                      }
-                    };
-                  }
-                  partiesDetails[militancy.Id].deputies[deputyId] = deputy;
-                }
-              }
-            }
-            setState(Object.values(partiesDetails));
+    Promise.all([getPublicFigures(), getDeputies(), getParties()])
+      .then(result => {
+        const pfs = result[0], deputies = result[1], parties = result[2];
+        const aux: { [id: string]: VotingPartyProps } = {};
+        for (const deputyId in voting.Votos) {
+          const vote = voting.Votos[deputyId];
+          const deputy = deputies[deputyId];
+          const pf = pfs[deputy.FiguraPublicaId];
+          const partyId = getPublicFigurePartyId(pf, voting.Fecha);
+          if (partyId === undefined) {
+            console.error('No se encontró el partido para', deputy, pf);
+            continue;
+          }
+          const party = parties[partyId];
+          if (aux[party.Sigla] === undefined) {
+            aux[party.Sigla] = {
+              party: party,
+              type: "DEPUTY",
+              votes: []
+            };
+          }
+          aux[party.Sigla].votes.push({
+            PublicFigureId: pf.Id,
+            Vote: getDeputyVotingValue(vote)
           })
-      });
+        }
+        setState(Object.values(aux));
+      })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
     <>
-      {state && state
-        .sort(
-          (pd1, pd2) => Object.keys(pd2.deputies).length - Object.keys(pd1.deputies).length)
-        .map(partyDetail => {
-          return (
-            <DeputiesVotingParty key={partyDetail.party.Alias} voting={voting} partyDetails={partyDetail}/>
-          )
-        })}
+      {state && state.map(value => {
+        return (
+          <VotingParty key={value.party.Sigla} party={value.party} type={"DEPUTY"} votes={value.votes}/>
+        )
+      })}
     </>
   )
 }

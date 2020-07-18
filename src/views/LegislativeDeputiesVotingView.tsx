@@ -19,7 +19,7 @@ export const LegislativeDeputiesVotingView: React.FC = () => {
   useEffect(() => {
     if(year === undefined || month === undefined) {
       const today = moment();
-      history.replace(`/votaciones/${today.get('year')}/${today.get('month')}`)
+      history.replace(`/diputados/votaciones/${today.get('year')}/${today.get('month')}`)
     } else {
       setDate(moment({year: +year, month: +month, day: 1}));
     }

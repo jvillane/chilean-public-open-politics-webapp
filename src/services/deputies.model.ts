@@ -22,20 +22,21 @@ export interface Afiliacion {
 }
 
 export interface Diputado {
+  Id: string
   Nombres: string
   ApellidoPaterno: string
   ApellidoMaterno: string
   Nacimiento?: string
   Genero: string
   Militancia: Afiliacion[]
-  Id: string
+  FiguraPublicaId: string
 }
 
 export interface Diputados {
   [Id: string]: Diputado
 }
 
-export interface Asistencia {
+export interface Inasistencia {
   [DiputadoId: string]: {
     TipoAsistencia: IdValor
     Justificacion?: {
@@ -53,7 +54,7 @@ export interface Sesion {
   Termino: string
   Tipo: IdValor
   Estado: IdValor
-  Asistencia: Asistencia
+  Inasistencia: Inasistencia
 }
 
 export interface Voto {

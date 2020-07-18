@@ -7,7 +7,7 @@ interface Params {
   id: string
 }
 
-export const LegislativeDeputyDetailsView: React.FC = () => {
+export const LegislativeSenatorDetailsView: React.FC = () => {
   const {id} = useParams<Params>();
   const [publicFigureId, setPublicFigureId] = useState<string>();
 

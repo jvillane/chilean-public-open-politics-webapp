@@ -18,7 +18,7 @@ export const ProfileInfo: React.FC<Props> = ({publicFigure, deputy}) => {
       <FadeIn transitionDuration={1000}>
         <div className="p-3 text-left">
           <Avatar variant="circle" alt={publicFigure.Nombre}
-                  src={`${BASE_URL}/img/avatar/${deputy.Id}.jpeg`} style={{height: "150px", width: "150px"}}/>
+                  src={`${BASE_URL}/img/avatar/${publicFigure.Id}.jpeg`} style={{height: "150px", width: "150px"}}/>
           <div className="font-weight-bold font-size-xl line-height-1 py-3">
             {publicFigure.Nombre}
           </div>

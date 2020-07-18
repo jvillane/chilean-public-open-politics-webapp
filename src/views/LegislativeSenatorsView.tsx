@@ -1,15 +1,15 @@
 import React from "react";
 
 import {Container, Grid} from '@material-ui/core';
-import {DeputiesList} from "../components/legislative/DeputiesList";
+import {SenatorsList} from "../components/legislative/SenatorsList";
 
-export const LegislativeDeputiesView: React.FC = () => {
+export const LegislativeSenatorsView: React.FC = () => {
 
   return (
     <Container className="text-black text-center py-5">
       <Grid item md={10} lg={8} className="mx-auto pb-4">
         <h2 className="display-3 px-4 font-weight-bold">
-          Integrantes de la Cámara
+          Integrantes del Senado
         </h2>
         <p className="font-size-xl mt-3 mb-0 text-black-50">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam illo incidunt quam quasi. Aliquid beatae
@@ -17,7 +17,7 @@ export const LegislativeDeputiesView: React.FC = () => {
           voluptatibus.
         </p>
       </Grid>
-      <DeputiesList/>
+      <SenatorsList/>
     </Container>
   )
 }

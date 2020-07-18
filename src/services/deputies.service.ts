@@ -4,7 +4,6 @@ import moment from "moment";
 
 let _deputies: Diputados;
 let _lapses: Periodos;
-let _parties: PartyList;
 
 export const getLapses = async (): Promise<Periodos> => {
   if (_lapses === undefined) {
@@ -68,23 +67,4 @@ export interface Party {
 
 export interface PartyList {
   [Id: string]: Party
-}
-
-export const getParties = async (): Promise<PartyList> => {
-  if (_parties === undefined) {
-    await getDeputies();
-    const deputies: Diputados = await getDeputies();
-    _parties = {};
-    for (const deputy of Object.values(deputies)) {
-      for (const militancy of deputy.Militancia) {
-        if (_parties[militancy.Id] === undefined) {
-          _parties[militancy.Id] = {
-            Nombre: militancy.Nombre,
-            Alias: militancy.Alias
-          }
-        }
-      }
-    }
-  }
-  return _parties;
 }
