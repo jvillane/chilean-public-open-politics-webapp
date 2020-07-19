@@ -25,6 +25,7 @@ import {LegislativeDeputiesVotingView} from "./views/LegislativeDeputiesVotingVi
 import {LegislativeDeputiesVotingDetailsView} from "./views/LegislativeDeputiesVotingDetailsView";
 import {LegislativeSenatorsView} from "./views/LegislativeSenatorsView";
 import {LegislativeSenatorDetailsView} from "./views/LegislativeSenatorDetailsView";
+import {LegislativeSenatorsVotingView} from "./views/LegislativeSenatorsVotingView";
 
 library.add(
   fas,
@@ -65,6 +66,9 @@ function App() {
         </Route>
         <Route exact path="/diputados/votaciones/:year?/:month?">
           <Layout children={<LegislativeDeputiesVotingView/>}/>
+        </Route>
+        <Route exact path="/senadores/votaciones">
+          <Layout children={<LegislativeSenatorsVotingView/>}/>
         </Route>
         <Route exact path="/diputados/votacion/:year/:id">
           <Layout children={<LegislativeDeputiesVotingDetailsView/>}/>

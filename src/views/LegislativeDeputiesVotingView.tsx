@@ -39,7 +39,7 @@ export const LegislativeDeputiesVotingView: React.FC = () => {
         </p>
       </Grid>
       <Grid container spacing={2} className="pt-5">
-        <Grid item xs={5} sm={3}>
+        <Grid item xs={4} sm={3}>
           <Card>
             <CardHeader title="Filtros"/>
             <CardContent>
