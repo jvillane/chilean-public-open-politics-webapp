@@ -27,8 +27,7 @@ export const getLawProjects = async (): Promise<ProyectosLey> => {
 
 export const getVotings = async (): Promise<VotacionMap> => {
   if (_lawProjects === undefined) {
-    const response = await axios.get<ProyectosLey>('data/senadores.proyectos_ley.json');
-    _lawProjects = response.data;
+    _lawProjects = await getLawProjects();
   }
   if (_votings === undefined) {
     _votings = {};
@@ -44,4 +43,15 @@ export const getVotings = async (): Promise<VotacionMap> => {
   return _votings;
 }
 
-
+export const getVoting = async (id: string): Promise<Votacion | undefined> => {
+  if (_votings === undefined) {
+    _votings = await getVotings();
+  }
+  const [boletin, index] = id.split("_");
+  for (const lawProject of Object.values(_lawProjects)) {
+    if (lawProject.BoletinNumero === boletin) {
+      return lawProject.Votaciones[+index - 1];
+    }
+  }
+  return undefined;
+}

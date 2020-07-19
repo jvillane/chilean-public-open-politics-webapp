@@ -2,15 +2,17 @@ import {IconName} from "@fortawesome/fontawesome-common-types";
 import {FiguraPublica} from "../../services/profile.model";
 import {IdValor} from "../../services/deputies.model";
 
-export type VoteType = "VOTE_IN_FAVOR" | "VOTE_AGAINST" | "VOTE_ABSTENTION" | "VOTE_DISPENSED";
+export type VoteType = "VOTE_IN_FAVOR" | "VOTE_AGAINST" | "VOTE_ABSTENTION" | "VOTE_DISPENSED" | "VOTE_MATCHING";
 
-export const VoteTypeArray: VoteType[] = ["VOTE_IN_FAVOR", "VOTE_AGAINST", "VOTE_ABSTENTION", "VOTE_DISPENSED"]
+export const DeputiesVoteTypeArray: VoteType[] = ["VOTE_IN_FAVOR", "VOTE_AGAINST", "VOTE_ABSTENTION", "VOTE_DISPENSED"]
+export const SenatorsVoteTypeArray: VoteType[] = ["VOTE_IN_FAVOR", "VOTE_AGAINST", "VOTE_ABSTENTION", "VOTE_MATCHING"]
 
 export const VT_LABEL: {[key in VoteType]: string} = {
   VOTE_IN_FAVOR: "A Favor",
   VOTE_AGAINST: "En Contra",
   VOTE_ABSTENTION: "Abstención",
   VOTE_DISPENSED: "Dispensado",
+  VOTE_MATCHING: "Pareo"
 }
 
 export const VT_ICON: {[key in VoteType]: IconName} = {
@@ -18,6 +20,7 @@ export const VT_ICON: {[key in VoteType]: IconName} = {
   VOTE_AGAINST: "times",
   VOTE_ABSTENTION: "hand-paper",
   VOTE_DISPENSED: "ban",
+  VOTE_MATCHING: "people-arrows"
 }
 
 export const VT_TEXT: {[key in VoteType]: string} = {
@@ -25,6 +28,7 @@ export const VT_TEXT: {[key in VoteType]: string} = {
   VOTE_AGAINST: "text-danger",
   VOTE_ABSTENTION: "text-warning",
   VOTE_DISPENSED: "text-dark",
+  VOTE_MATCHING: "text-dark"
 }
 
 export const VT_BTN: {[key in VoteType]: string} = {
@@ -32,6 +36,7 @@ export const VT_BTN: {[key in VoteType]: string} = {
   VOTE_AGAINST: "btn-danger",
   VOTE_ABSTENTION: "btn-warning",
   VOTE_DISPENSED: "btn-dark",
+  VOTE_MATCHING: "btn-dark",
 }
 
 export interface Vote {
@@ -66,5 +71,19 @@ export const getDeputyVotingValue = (value: IdValor): VoteType => {
     case 3:
     default:
       return "VOTE_DISPENSED";
+  }
+}
+
+export const getSenatorVotingValue = (value: string): VoteType => {
+  switch (value) {
+    case "No":
+      return "VOTE_AGAINST";
+    case "Si":
+      return "VOTE_IN_FAVOR";
+    case "Abstencion":
+      return "VOTE_ABSTENTION";
+    case "Pareo":
+    default:
+      return "VOTE_MATCHING";
   }
 }

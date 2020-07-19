@@ -10,7 +10,7 @@ import {
   faCheck,
   faFemale, faHandPaper,
   faMale,
-  faMinusCircle,
+  faMinusCircle, faPeopleArrows,
   fas,
   faTimes,
   faUser
@@ -26,6 +26,7 @@ import {LegislativeDeputiesVotingDetailsView} from "./views/LegislativeDeputiesV
 import {LegislativeSenatorsView} from "./views/LegislativeSenatorsView";
 import {LegislativeSenatorDetailsView} from "./views/LegislativeSenatorDetailsView";
 import {LegislativeSenatorsVotingView} from "./views/LegislativeSenatorsVotingView";
+import {LegislativeSenatorsVotingDetailsView} from "./views/LegislativeSenatorsVotingDetailsView";
 
 library.add(
   fas,
@@ -36,6 +37,7 @@ library.add(
   faFemale,
   faMale,
   faMinusCircle,
+  faPeopleArrows,
   faTimes,
   faUser
 );
@@ -72,6 +74,9 @@ function App() {
         </Route>
         <Route exact path="/diputados/votacion/:year/:id">
           <Layout children={<LegislativeDeputiesVotingDetailsView/>}/>
+        </Route>
+        <Route exact path="/senadores/votacion/:id">
+          <Layout children={<LegislativeSenatorsVotingDetailsView/>}/>
         </Route>
         <Redirect from="/10afp" to="/diputados/votacion/2020/33634"/>
         <Redirect from="*" to="/"/>

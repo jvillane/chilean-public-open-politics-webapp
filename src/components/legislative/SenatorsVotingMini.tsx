@@ -18,7 +18,7 @@ export const SenatorsVotingMini: React.FC<Props> = ({id, voting}) => {
 
   return (
     <Card className="card-box p-4 clickable"
-          onClick={() => history.push(`/diputados/votacion/${date.get('year')}/${id}`)}>
+          onClick={() => history.push(`/senadores/votacion/${id}`)}>
       <div className="text-center">
         <div>
           <b>{date.format('DD-MMM-YYYY')}</b>

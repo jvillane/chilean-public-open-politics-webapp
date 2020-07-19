@@ -14,7 +14,8 @@ import {
   LegislatorType,
   Vote,
   VoteType,
-  VoteTypeArray,
+  DeputiesVoteTypeArray,
+  SenatorsVoteTypeArray,
   VT_BTN,
   VT_ICON, VT_LABEL,
   VT_TEXT
@@ -35,7 +36,8 @@ export const VotingParty: React.FC<VotingPartyProps> = ({party, votes, type}) =>
     VOTE_IN_FAVOR: false,
     VOTE_AGAINST: false,
     VOTE_ABSTENTION: false,
-    VOTE_DISPENSED: false
+    VOTE_DISPENSED: false,
+    VOTE_MATCHING: false,
   });
 
   useEffect(() => {
@@ -46,7 +48,8 @@ export const VotingParty: React.FC<VotingPartyProps> = ({party, votes, type}) =>
           VOTE_IN_FAVOR: [],
           VOTE_AGAINST: [],
           VOTE_ABSTENTION: [],
-          VOTE_DISPENSED: []
+          VOTE_DISPENSED: [],
+          VOTE_MATCHING: []
         }
         for (const vote of votes) {
           pfVotes[vote.Vote].push(pfs[vote.PublicFigureId])
@@ -78,7 +81,7 @@ export const VotingParty: React.FC<VotingPartyProps> = ({party, votes, type}) =>
                 </div>
               </Grid>
             </CardContent>
-            {VoteTypeArray.map((vote: VoteType) => {
+            {(type === "SENATOR" ? SenatorsVoteTypeArray : DeputiesVoteTypeArray).map((vote: VoteType) => {
               const voteNumber = Object.keys(pfVotes[vote]).length;
               if (voteNumber > 0) {
                 return (
