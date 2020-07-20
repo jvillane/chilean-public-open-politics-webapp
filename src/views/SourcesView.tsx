@@ -33,7 +33,7 @@ export const SourcesView: React.FC = () => {
                       instituciones y formatos, y entregarla sin interpretaciones y lo más depurada posible
                     </blockquote>
                     <div className="font-size-lg font-weight-bold">
-                      el equipo Open-Data.CL
+                      el equipo open-data.CL
                     </div>
                   </div>
                 </div>
@@ -221,7 +221,7 @@ export const SourcesView: React.FC = () => {
                       <div className="d-30 rounded-pill btn-icon bg-neutral-first mr-2">
                         <FontAwesomeIcon icon={['fas', 'check']}/>
                       </div>
-                      <span className="pt-1">Militancias Políticas</span>
+                      <span className="pt-1">Candidatos y Militancias Políticas</span>
                     </div>
                   </Grid>
                   <Grid item md={6}>
