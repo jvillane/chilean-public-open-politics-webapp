@@ -47,11 +47,14 @@ export const DeputiesVotingParties: React.FC<Props> = ({voting}) => {
 
   return (
     <>
-      {state && state.map(value => {
-        return (
-          <VotingParty key={value.party.Sigla} party={value.party} type={"DEPUTY"} votes={value.votes}/>
-        )
-      })}
+      {state && state
+        .sort((s1, s2) => s2.votes.length - s1.votes.length)
+        .map(value => {
+          return (
+            <VotingParty key={value.party.Sigla} party={value.party} type={"DEPUTY"} votes={value.votes}/>
+          )
+        })
+      }
     </>
   )
 }

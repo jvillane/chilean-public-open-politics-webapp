@@ -29,11 +29,11 @@ export const getPublicFigurePartyId = (pf: FiguraPublica, votingDate?: string): 
           return militancy.PartidoId;
         }
       } else if(militancy.Desde) {
-        if(votingMoment.isSameOrAfter(moment(militancy.Desde), 'day')){
+        if(votingMoment.isSameOrAfter(militancy.Desde)){
           return militancy.PartidoId;
         }
       } else if(militancy.Hasta) {
-        if(votingMoment.isSameOrBefore(moment(militancy.Hasta), 'day')){
+        if(votingMoment.isSameOrBefore(militancy.Hasta)){
           return militancy.PartidoId;
         }
       } else {
