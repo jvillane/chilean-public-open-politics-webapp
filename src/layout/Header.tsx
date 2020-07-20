@@ -28,7 +28,7 @@ export const Header: React.FC = () => {
             <div className="header-nav-menu d-none d-lg-block">
               <ul className="d-flex nav nav-neutral-first justify-content-center">
                 <li className="justify-content-center">
-                  <NavLink to="/ejecutivo" className="font-weight-bold rounded-sm px-3">
+                  <NavLink to="/diputados" className="font-weight-bold rounded-sm px-3">
                     Diputados
                     <span className="opacity-5 dropdown-arrow">
                     <FontAwesomeIcon icon={['fas', 'angle-down']}/>

@@ -10,7 +10,7 @@ import {
   faCheck,
   faFemale, faHandPaper,
   faMale,
-  faMinusCircle, faPeopleArrows,
+  faMinusCircle, faPeopleArrows, faQuoteRight,
   fas,
   faTimes,
   faUser
@@ -27,6 +27,7 @@ import {LegislativeSenatorsView} from "./views/LegislativeSenatorsView";
 import {LegislativeSenatorDetailsView} from "./views/LegislativeSenatorDetailsView";
 import {LegislativeSenatorsVotingView} from "./views/LegislativeSenatorsVotingView";
 import {LegislativeSenatorsVotingDetailsView} from "./views/LegislativeSenatorsVotingDetailsView";
+import {SourcesView} from "./views/SourcesView";
 
 library.add(
   fas,
@@ -38,6 +39,7 @@ library.add(
   faMale,
   faMinusCircle,
   faPeopleArrows,
+  faQuoteRight,
   faTimes,
   faUser
 );
@@ -53,6 +55,9 @@ function App() {
       <Switch>
         <Route exact path="/">
           <Layout children={<HomeView/>}/>
+        </Route>
+        <Route exact path="/fuentes">
+          <Layout children={<SourcesView/>}/>
         </Route>
         <Route exact path="/diputados/integrantes">
           <Layout children={<LegislativeDeputiesView/>}/>
@@ -79,6 +84,8 @@ function App() {
           <Layout children={<LegislativeSenatorsVotingDetailsView/>}/>
         </Route>
         <Redirect from="/10afp" to="/diputados/votacion/2020/33634"/>
+        <Redirect from="/diputados" to="/diputados/integrantes"/>
+        <Redirect from="/senadores" to="/senadores/integrantes"/>
         <Redirect from="*" to="/"/>
       </Switch>
     </ThemeProvider>

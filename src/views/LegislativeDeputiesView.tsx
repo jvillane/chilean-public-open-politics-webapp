@@ -6,15 +6,14 @@ import {DeputiesList} from "../components/legislative/DeputiesList";
 export const LegislativeDeputiesView: React.FC = () => {
 
   return (
-    <Container className="text-black text-center py-5">
+    <Container className="text-black text-center py-3">
       <Grid item md={10} lg={8} className="mx-auto pb-4">
         <h2 className="display-3 px-4 font-weight-bold">
-          Integrantes de la Cámara
+          Diputadas y Diputados
         </h2>
         <p className="font-size-xl mt-3 mb-0 text-black-50">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam illo incidunt quam quasi. Aliquid beatae
-          distinctio hic illum iste libero minima repellendus similique. A excepturi maiores numquam, obcaecati sunt
-          voluptatibus.
+          Sus funciones abarcan tanto la legislación (en conjunto con el Senado y el Presidente de la República) como la
+          fiscalización de los actos del Gobierno
         </p>
       </Grid>
       <DeputiesList/>
