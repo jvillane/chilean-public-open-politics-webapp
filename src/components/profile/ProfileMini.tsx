@@ -6,6 +6,7 @@ import {useHistory} from "react-router";
 import {FiguraPublica} from "../../services/profile.model";
 import {Partido} from "../../services/parties.model";
 import {getParty} from "../../services/parties.service";
+import {Typography} from "@material-ui/core";
 
 interface Props {
   link: string
@@ -53,9 +54,9 @@ export const ProfileMini: React.FC<Props> = ({link, id, withPartyName}) => {
             {state.publicFigure.Nombre}
           </div>
           {withPartyName && (
-            <div className="text-black-50">
+            <Typography variant="subtitle2" className="text-black-50">
               {state.party.Nombre}
-            </div>
+            </Typography>
           )}
         </>
       )}
