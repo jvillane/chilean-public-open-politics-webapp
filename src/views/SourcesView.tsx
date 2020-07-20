@@ -33,7 +33,7 @@ export const SourcesView: React.FC = () => {
                       instituciones y formatos, y entregarla sin interpretaciones y lo más depurada posible
                     </blockquote>
                     <div className="font-size-lg font-weight-bold">
-                      el equipo open-data.CL
+                      el equipo open-data.cl
                     </div>
                   </div>
                 </div>
