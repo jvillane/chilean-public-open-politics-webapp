@@ -30,7 +30,7 @@ export const SourcesView: React.FC = () => {
                     <FontAwesomeIcon icon={['fas', 'quote-right']} className="text-primary font-size-xxl"/>
                     <blockquote className="mt-3 mb-2 text-black-50">
                       Queremos acercar a la ciudadanía la información que hoy se encuentra repartida en diferentes
-                      instituciones y formatos, y entregarla sin interpretaciones y lo más depurada posible
+                      instituciones y formatos, entregarla sin interpretaciones y lo más depurada posible
                     </blockquote>
                     <div className="font-size-lg font-weight-bold">
                       el equipo open-data.cl
