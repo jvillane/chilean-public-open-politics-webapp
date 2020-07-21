@@ -131,9 +131,9 @@ export const Header: React.FC = () => {
                       <ListItem
                         button
                         component={NavLink}
-                        to="/integrantes"
+                        to="/diputados"
                         className="px-4 d-flex align-items-center">
-                        <span>Integrantes</span>
+                        <span>Diputados</span>
                         <FontAwesomeIcon
                           icon={['fas', 'angle-right']}
                           className="opacity-6 ml-auto"
@@ -142,9 +142,20 @@ export const Header: React.FC = () => {
                       <ListItem
                         button
                         component={NavLink}
-                        to="/votaciones"
+                        to="/senadores"
                         className="px-4 d-flex align-items-center">
-                        <span>Votaciones</span>
+                        <span>Senadores</span>
+                        <FontAwesomeIcon
+                          icon={['fas', 'angle-right']}
+                          className="opacity-6 ml-auto"
+                        />
+                      </ListItem>
+                      <ListItem
+                        button
+                        component={NavLink}
+                        to="/fuentes"
+                        className="px-4 d-flex align-items-center">
+                        <span>Fuentes</span>
                         <FontAwesomeIcon
                           icon={['fas', 'angle-right']}
                           className="opacity-6 ml-auto"
