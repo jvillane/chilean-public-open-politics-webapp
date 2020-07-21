@@ -19,7 +19,7 @@ export const DeputiesList: React.FC = () => {
       {deputies && Object.keys(deputies).map(id => {
         return (
           <Grid item xs={6} sm={4} xl={3} key={`senator_${id}`}>
-            <ProfileMini withPartyName id={deputies[id].FiguraPublicaId} link={`/senadores/integrante/${id}`}/>
+            <ProfileMini withPartyName id={deputies[id].FiguraPublicaId} link={`/diputados/integrante/${id}`}/>
           </Grid>
         )
       })}
