@@ -33,6 +33,7 @@ export const LegislativeDeputiesVotingView: React.FC = () => {
   const {year, month} = useParams<Params>();
   const today = moment();
   const nowYear = +today.get('year');
+  const nowMonth = +today.get('month');
   const history = useHistory();
   const years = Array.from(Array(nowYear - MIN_YEAR + 1), (_, i) => MIN_YEAR + i)
 
@@ -42,8 +43,7 @@ export const LegislativeDeputiesVotingView: React.FC = () => {
 
   useEffect(() => {
     if (year === undefined || month === undefined) {
-      const today = moment();
-      setYearMonth(today.get('year'), today.get('month'));
+      setYearMonth(nowYear, nowMonth);
     } else if (+year < MIN_YEAR || (+year === MIN_YEAR && +month < MIN_MONTH) || !Number.isInteger(+year) || !Number.isInteger(+month)) {
       setYearMonth(MIN_YEAR, MIN_MONTH);
     }
@@ -84,9 +84,11 @@ export const LegislativeDeputiesVotingView: React.FC = () => {
                 {MONTH_NAMES.map((name, index) => {
                   if (+year === MIN_YEAR && index + 1 < MIN_MONTH) {
                     return null;
+                  } else if (+year === nowYear && index + 1 > nowMonth) {
+                    return null;
                   }
                   return (
-                    <MenuItem key={index} value={index+1}>{name}</MenuItem>
+                    <MenuItem key={index} value={index + 1}>{name}</MenuItem>
                   );
                 })}
               </Select>
@@ -98,15 +100,17 @@ export const LegislativeDeputiesVotingView: React.FC = () => {
                 return (
                   <Button key={`month_${index + 1}`} aria-label={name}
                           variant={index + 1 === +month ? "contained" : "outlined"}
-                          onClick={() => setYearMonth(year, index+1)}
-                          disabled={+year === MIN_YEAR && index + 1 < MIN_MONTH}>{name}</Button>
+                          onClick={() => setYearMonth(year, index + 1)}
+                          disabled={(+year === MIN_YEAR && index + 1 < MIN_MONTH) || (+year === nowYear && index + 1 > nowMonth)}>
+                    {name}
+                  </Button>
                 );
               })}
             </ButtonGroup>
           </Hidden>
         </Grid>
       </Grid>
-      <DeputiesVotingsByYear year={+year} month={+month-1}/>
+      {year && month && (<DeputiesVotingsByYear year={+year} month={+month - 1}/>)}
     </Container>
   )
 }
