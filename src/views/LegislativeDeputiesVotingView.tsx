@@ -20,14 +20,9 @@ interface Params {
   month: string
 }
 
-interface State {
-  selYear: number
-  selMonth: number
-}
-
 const MIN_YEAR = 2018;
 const MIN_MONTH = 3;
-const MONTH_NAMES = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+const MONTH_NAMES = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
 
 export const LegislativeDeputiesVotingView: React.FC = () => {
   const {year, month} = useParams<Params>();
@@ -84,7 +79,7 @@ export const LegislativeDeputiesVotingView: React.FC = () => {
                 {MONTH_NAMES.map((name, index) => {
                   if (+year === MIN_YEAR && index + 1 < MIN_MONTH) {
                     return null;
-                  } else if (+year === nowYear && index + 1 > nowMonth) {
+                  } else if (+year === nowYear && index > nowMonth) {
                     return null;
                   }
                   return (
@@ -101,8 +96,8 @@ export const LegislativeDeputiesVotingView: React.FC = () => {
                   <Button key={`month_${index + 1}`} aria-label={name}
                           variant={index + 1 === +month ? "contained" : "outlined"}
                           onClick={() => setYearMonth(year, index + 1)}
-                          disabled={(+year === MIN_YEAR && index + 1 < MIN_MONTH) || (+year === nowYear && index + 1 > nowMonth)}>
-                    {name}
+                          disabled={(+year === MIN_YEAR && index + 1 < MIN_MONTH) || (+year === nowYear && index > nowMonth)}>
+                    {name.substring(0,3)}
                   </Button>
                 );
               })}
