@@ -125,15 +125,15 @@ export const Header: React.FC = () => {
 
                   <div className="p-3">
                     <div className="px-4 text-uppercase py-2 text-second font-weight-bold font-size-sm">
-                      Menú
+                      Diputados
                     </div>
                     <List component="div" className="nav-pills nav-neutral-primary nav-pills-rounded flex-column">
                       <ListItem
                         button
                         component={NavLink}
-                        to="/diputados"
+                        to="/diputados/integrantes"
                         className="px-4 d-flex align-items-center">
-                        <span>Diputados</span>
+                        <span>Integrantes</span>
                         <FontAwesomeIcon
                           icon={['fas', 'angle-right']}
                           className="opacity-6 ml-auto"
@@ -142,14 +142,46 @@ export const Header: React.FC = () => {
                       <ListItem
                         button
                         component={NavLink}
-                        to="/senadores"
+                        to="/diputados/votaciones"
                         className="px-4 d-flex align-items-center">
-                        <span>Senadores</span>
+                        <span>Votaciones</span>
                         <FontAwesomeIcon
                           icon={['fas', 'angle-right']}
                           className="opacity-6 ml-auto"
                         />
                       </ListItem>
+                    </List>
+                    <div className="px-4 text-uppercase py-2 text-second font-weight-bold font-size-sm">
+                      Senadores
+                    </div>
+                    <List>
+                      <ListItem
+                        button
+                        component={NavLink}
+                        to="/senadores/integrantes"
+                        className="px-4 d-flex align-items-center">
+                        <span>Integrantes</span>
+                        <FontAwesomeIcon
+                          icon={['fas', 'angle-right']}
+                          className="opacity-6 ml-auto"
+                        />
+                      </ListItem>
+                      <ListItem
+                        button
+                        component={NavLink}
+                        to="/senadores/votaciones"
+                        className="px-4 d-flex align-items-center">
+                        <span>Votaciones</span>
+                        <FontAwesomeIcon
+                          icon={['fas', 'angle-right']}
+                          className="opacity-6 ml-auto"
+                        />
+                      </ListItem>
+                    </List>
+                    <div className="px-4 text-uppercase py-2 text-second font-weight-bold font-size-sm">
+                      Otros
+                    </div>
+                    <List>
                       <ListItem
                         button
                         component={NavLink}
