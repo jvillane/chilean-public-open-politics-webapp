@@ -114,3 +114,17 @@ export interface ProyectoLey {
 export interface ProyectosLey {
   [BoletinNumero: string]: ProyectoLey
 }
+
+export interface PeriodoSenador {
+  Id:  string
+  Inicio: string
+  Termino: string
+}
+
+export interface PeriodosSenador {
+  [periodoId: string]: PeriodoSenador
+}
+
+export interface SenadorPeriodos {
+  [senadorId: string]: PeriodoSenador[]
+}

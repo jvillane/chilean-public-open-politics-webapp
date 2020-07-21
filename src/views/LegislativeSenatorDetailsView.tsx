@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router";
-import {getDeputy} from "../services/deputies.service";
 import {Profile} from "../components/profile/Profile";
+import {getSenator} from "../services/senators.service";
 
 interface Params {
   id: string
@@ -12,16 +12,18 @@ export const LegislativeSenatorDetailsView: React.FC = () => {
   const [publicFigureId, setPublicFigureId] = useState<string>();
 
   useEffect(() => {
-    getDeputy(id)
-      .then(deputy => {
-        if (deputy && deputy.FiguraPublicaId) {
-          setPublicFigureId(deputy.FiguraPublicaId)
+    getSenator(id)
+      .then(senator => {
+        console.log(senator);
+        if (senator && senator.FiguraPublicaId) {
+          setPublicFigureId(senator.FiguraPublicaId)
         } else {
           //TODO add deputy not found view
         }
       })
   }, [id])
 
+  console.log(publicFigureId);
   return (
     <Profile id={publicFigureId}/>
   )

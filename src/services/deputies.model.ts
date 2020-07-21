@@ -3,14 +3,19 @@ export interface IdValor {
   Valor: string
 }
 
-export interface Periodo {
+export interface PeriodoDiputado {
+  Id: string
   Nombre: string
   Inicio: string
   Termino: string
 }
 
-export interface Periodos {
-  [Id: string]: Periodo
+export interface DiputadoPeriodos {
+  [diputadoId: string]: PeriodoDiputado[]
+}
+
+export interface PeriodosDiputado {
+  [Id: string]: PeriodoDiputado
 }
 
 export interface Afiliacion {

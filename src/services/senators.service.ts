@@ -1,13 +1,29 @@
 import axios from "axios";
-import {ProyectosLey, Senadores, Votacion} from "./senators.model";
+import {PeriodoSenador, ProyectosLey, Senador, Senadores, SenadorPeriodos, Votacion} from "./senators.model";
 
 export interface VotacionMap {
   [id: string]: Votacion
 }
 
+let _lapses: SenadorPeriodos;
 let _senators: Senadores;
 let _lawProjects: ProyectosLey;
 let _votings: VotacionMap
+
+export const getSenatorsLapses = async (): Promise<SenadorPeriodos> => {
+  if (_lapses === undefined) {
+    const response = await axios.get<SenadorPeriodos>('data/senadores.periodos.json');
+    _lapses = response.data;
+  }
+  return _lapses;
+}
+
+export const getSenatorLapses = async (senatorId: string): Promise<PeriodoSenador[]> => {
+  if (_lapses === undefined) {
+    _lapses = await getSenatorsLapses();
+  }
+  return _lapses[senatorId];
+}
 
 export const getSenators = async (): Promise<Senadores> => {
   if (_senators === undefined) {
@@ -15,6 +31,16 @@ export const getSenators = async (): Promise<Senadores> => {
     _senators = response.data;
   }
   return _senators;
+}
+
+export const getSenator = async (id?: string | number): Promise<Senador | undefined> => {
+  if (_senators === undefined) {
+    _senators = await getSenators();
+  }
+  if(id === undefined){
+    return undefined;
+  }
+  return _senators[String(id)];
 }
 
 export const getLawProjects = async (): Promise<ProyectosLey> => {

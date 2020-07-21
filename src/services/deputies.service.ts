@@ -1,23 +1,23 @@
-import {Diputado, Diputados, Periodos, Votacion, Votaciones} from "./deputies.model";
+import {Diputado, DiputadoPeriodos, Diputados, PeriodoDiputado, Votacion, Votaciones} from "./deputies.model";
 import axios from "axios";
 import moment from "moment";
 
 let _deputies: Diputados;
-let _lapses: Periodos;
+let _lapses: DiputadoPeriodos;
 
-export const getLapses = async (): Promise<Periodos> => {
+export const getDeputiesLapses = async (): Promise<DiputadoPeriodos> => {
   if (_lapses === undefined) {
-    const response = await axios.get<Periodos>('data/diputados.periodos.json');
+    const response = await axios.get<DiputadoPeriodos>('data/diputados.periodos.json');
     _lapses = response.data;
-    _lapses = Object.keys(_lapses)
-      .filter(
-        key => moment(_lapses[key].Inicio).isAfter('1989-12-31')
-      )
-      .reduce<Periodos>((lapses, key) => {
-        return {...lapses, [key]: _lapses[key]}
-      }, {})
   }
   return _lapses;
+}
+
+export const getDeputyLapses = async (deputyId: string): Promise<PeriodoDiputado[]> => {
+  if (_lapses === undefined) {
+    _lapses = await getDeputiesLapses();
+  }
+  return _lapses[deputyId];
 }
 
 export const getDeputies = async (): Promise<Diputados> => {
@@ -28,11 +28,14 @@ export const getDeputies = async (): Promise<Diputados> => {
   return _deputies;
 }
 
-export const getDeputy = async (id: string): Promise<Diputado | undefined> => {
+export const getDeputy = async (id?: string | number): Promise<Diputado | undefined> => {
+  if(id === undefined) {
+    return undefined;
+  }
   if (_deputies === undefined) {
     await getDeputies();
   }
-  return _deputies[id];
+  return _deputies[String(id)];
 }
 
 export const getVotings = async (year: number, month: number): Promise<Votaciones> => {
@@ -58,13 +61,4 @@ export const getVoting = async (year: string, id: string): Promise<Votacion | un
     }
   }
   return undefined;
-}
-
-export interface Party {
-  Nombre: string
-  Alias: string
-}
-
-export interface PartyList {
-  [Id: string]: Party
 }

@@ -9,14 +9,20 @@ import {
   TimelineOppositeContent,
   TimelineSeparator
 } from "@material-ui/lab";
-import {Diputado, Periodos} from "../../services/deputies.model";
+import {Diputado} from "../../services/deputies.model";
 import {FiguraPublica} from "../../services/profile.model";
 import moment, {Moment} from "moment";
-import {getLapses} from "../../services/deputies.service";
+import {Senador} from "../../services/senators.model";
+import {getDeputyLapses} from "../../services/deputies.service";
+import {getPublicFigureParty} from "../../services/profile.service";
+import {getParties} from "../../services/parties.service";
+import {TimelineLapse} from "./timeline/TimelineLapse";
+import {getSenatorLapses} from "../../services/senators.service";
 
 interface Props {
   publicFigure: FiguraPublica
   deputy?: Diputado
+  senator?: Senador
 }
 
 interface Event {
@@ -25,48 +31,58 @@ interface Event {
   children: ReactNode
 }
 
-export const ProfileTimeline: React.FC<Props> = ({publicFigure, deputy }) => {
+export const ProfileTimeline: React.FC<Props> = ({publicFigure, deputy, senator}) => {
   const [events, setEvents] = useState<Event[]>();
 
   useEffect(() => {
-    getLapses()
-      .then(lapses => updateEvents(lapses))
+    getParties()
+      .then(() => updateEvents());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [deputy, publicFigure]);
+  }, [publicFigure, deputy, senator]);
 
-  const updateEvents = (lapses: Periodos) => {
+  const updateDeputy = async (events: Event[]) => {
     if (deputy) {
-      const events: Event[] = [];
-      for (const lapse of Object.values(lapses)) {
-        for (const militancy of deputy.Militancia) {
-          if (militancy.Inicio === lapse.Inicio) {
-            const date = moment(lapse.Inicio);
-            events.push({
-              date,
-              displayDate: date.format("DD-MMM-YYYY"),
-              children: <>Inicia período {lapse.Nombre} en Cámara Baja, bancada <b>{militancy.Nombre}</b></>
-            })
-          } else if (militancy.Termino === lapse.Termino) {
-            const date = moment(lapse.Inicio);
-            events.push({
-              date,
-              displayDate: date.format("DD-MMM-YYYY"),
-              children: <>{militancy.Alias === 'IND' ? <>Cambio en militancia, a
-                bancada <b>Independiente</b></> : <>Ahora pertenece a <b>{militancy.Nombre}</b></>}</>
-            })
-          }
-          if (militancy.Termino === lapse.Termino) {
-            const date = moment(lapse.Termino);
-            events.push({
-              date,
-              displayDate: date.format("DD-MMM-YYYY"),
-              children: <>Finaliza período {lapse.Nombre} en Cámara Baja</>
-            })
-          }
-        }
+      for (const lapse of await getDeputyLapses(deputy.Id)) {
+        const momentFrom = moment(lapse.Inicio);
+        const partyFrom = await getPublicFigureParty(publicFigure, lapse.Inicio);
+        const momentTo = moment(lapse.Termino);
+        const partyTo = await getPublicFigureParty(publicFigure, lapse.Termino);
+        events.push({
+          date: momentFrom,
+          displayDate: momentFrom.format("DD-MMM-YYYY"),
+          children: <TimelineLapse start baja name={lapse.Nombre} party={partyFrom}/>
+        });
+        events.push({
+          date: momentTo,
+          displayDate: momentTo.format("DD-MMM-YYYY"),
+          children: <TimelineLapse baja name={lapse.Nombre} party={partyTo}/>
+        });
       }
-      setEvents(events.sort((e1, e2) => e2.date.diff(e1.date)));
     }
+    if (senator) {
+      for (const lapse of await getSenatorLapses(senator.FiguraPublicaId)) {
+        const momentFrom = moment(lapse.Inicio);
+        const partyFrom = await getPublicFigureParty(publicFigure, lapse.Inicio);
+        const momentTo = moment(lapse.Termino);
+        const partyTo = await getPublicFigureParty(publicFigure, lapse.Termino);
+        events.push({
+          date: momentFrom,
+          displayDate: momentFrom.format("DD-MMM-YYYY"),
+          children: <TimelineLapse start name={lapse.Id} party={partyFrom}/>
+        });
+        events.push({
+          date: momentTo,
+          displayDate: momentTo.format("DD-MMM-YYYY"),
+          children: <TimelineLapse name={lapse.Id} party={partyTo}/>
+        });
+      }
+    }
+  }
+
+  const updateEvents = async () => {
+    const events: Event[] = [];
+    Promise.all([updateDeputy(events)])
+      .then(() => setEvents(events.sort((e1, e2) => e2.date.diff(e1.date))))
   }
 
   return (

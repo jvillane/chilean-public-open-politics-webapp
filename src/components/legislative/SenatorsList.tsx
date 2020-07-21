@@ -4,12 +4,13 @@ import {getMedia, getPublicFigures} from "../../services/profile.service";
 import {Senadores} from "../../services/senators.model";
 import {getSenators} from "../../services/senators.service";
 import {ProfileMini} from "../profile/ProfileMini";
+import {getParties} from "../../services/parties.service";
 
 export const SenatorsList: React.FC = () => {
   const [senators, setSenators] = useState<Senadores>();
 
   useEffect(() => {
-    Promise.all([getSenators(), getMedia(), getPublicFigures()])
+    Promise.all([getSenators(), getMedia(), getPublicFigures(), getParties()])
       .then(responses => setSenators(responses[0]))
   }, []);
 

@@ -90,7 +90,7 @@ export const HomeView: React.FC = () => {
                     </div>
                     <span className="pt-1">
                       Percibe una dieta líquida de <span className="font-weight-bolder text-info">
-                      $ <CountUp start={0} end={6848420} duration={4} delay={1} separator="." decimals={0} decimal=","/>
+                      $ <CountUp start={0} end={6848420} duration={2} delay={0} separator="." decimals={0} decimal=","/>
                     </span>
                     </span>
                   </div>
@@ -140,7 +140,7 @@ export const HomeView: React.FC = () => {
                     </div>
                     <span className="pt-1">
                       Percibe una dieta mensual bruta de <span className="font-weight-bolder text-warning">
-                      $ <CountUp start={0} end={9349851} duration={4} delay={1} separator="." decimals={0} decimal=","/>
+                      $ <CountUp start={0} end={9349851} duration={2} delay={0} separator="." decimals={0} decimal=","/>
                     </span>
                     </span>
                   </div>
@@ -155,9 +155,9 @@ export const HomeView: React.FC = () => {
             Privilegios Parlamentarios
           </h5>
         </div>
-        <Grid container spacing={3} className="w-100 mb-3 mb-xl-0">
+        <Grid container spacing={0} className="w-100 mb-3 mb-xl-0">
           <Grid item lg={4}>
-            <div className="feature-box pr-4 text-center">
+            <div className="feature-box px-4 text-center">
               <h3 className="font-size-xl font-weight-bold my-3 text-danger">
                 Fuero Parlamentario
               </h3>
@@ -166,13 +166,16 @@ export const HomeView: React.FC = () => {
                 Senador, desde el día de su elección, designación o incorporación, <b className="text-black">no pueda
                 ser procesado o privado
                 instantáneamente de su libertad</b>, sin que antes exista un pronunciamiento de la Corte de Apelaciones
-                respectiva, a menos que se trate de un delito flagrante. Si un parlamentario es desaforado queda
+                respectiva, a menos que se trate de un delito flagrante.
+              </p>
+              <p className="opacity-4 mb-3">
+                Si un parlamentario es desaforado queda
                 suspendido de su cargo y sujeto al juez competente como cualquier otro ciudadano
               </p>
             </div>
           </Grid>
           <Grid item lg={4}>
-            <div className="feature-box pr-4 text-center">
+            <div className="feature-box px-4 text-center">
               <h3 className="font-size-xl font-weight-bold my-3 text-danger">
                 Inviolabilidad Parlamentaria
               </h3>
@@ -186,13 +189,16 @@ export const HomeView: React.FC = () => {
             </div>
           </Grid>
           <Grid item lg={4}>
-            <div className="feature-box pr-4 text-center">
+            <div className="feature-box px-4 text-center">
               <h3 className="font-size-xl font-weight-bold my-3 text-danger">
                 Dieta Parlamentaria
               </h3>
               <p className="opacity-4 mb-3">
                 Constituye la remuneración que los Senadores y Diputado perciben mensualmente, que es equivalente al
-                sueldo de un Ministro de Estado, incluidas todas las asignaciones que a éstos corresponden. Se introdujo
+                sueldo de un Ministro de Estado, incluidas todas las asignaciones que a éstos corresponden.
+              </p>
+              <p className="opacity-4 mb-3">
+                Se introdujo
                 con el avance de la democracia para permitir la participación en las cámaras de personas que no
                 disfrutan de una posición patrimonial cómoda, y <b className="text-black">para compensar la consagración
                 de tiempo y esfuerzo a la actividad parlamentaria</b>

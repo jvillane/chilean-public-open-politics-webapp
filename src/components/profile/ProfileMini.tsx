@@ -40,11 +40,11 @@ export const ProfileMini: React.FC<Props> = ({link, id, withPartyName}) => {
   const imgSource = mediaDetails && mediaDetails.avatar ? `${BASE_URL}/img/avatar/${mediaDetails.avatar}` : undefined;
 
   return (
-    <div className="position-relative py-1 py-xl-3 px-2 px-xl-3 clickable"
-         onClick={() => history.push(link)}>
+    <div className="position-relative py-1 py-xl-3 px-2 px-xl-3">
       {state && (
         <>
-          <div className="avatar-icon-wrapper rounded-circle d-80 mx-auto">
+          <div className="avatar-icon-wrapper rounded-circle d-80 mx-auto clickable"
+               onClick={() => history.push(link)}>
             <div className="d-block p-0 avatar-icon-wrapper rounded-circle m-0">
               <Avatar round alt={state.publicFigure.Nombre} size="80px" name={state.publicFigure.Nombre}
                       src={imgSource}/>

@@ -9,15 +9,16 @@ import {BASE_URL} from "../../config";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {ProfileMini} from "../profile/ProfileMini";
 import {
+  DeputiesVoteTypeArray,
   GET_LEGISLATOR_ID_PATH,
   LEGISLATOR_ID_KEY,
   LegislatorType,
+  SenatorsVoteTypeArray,
   Vote,
   VoteType,
-  DeputiesVoteTypeArray,
-  SenatorsVoteTypeArray,
   VT_BTN,
-  VT_ICON, VT_LABEL,
+  VT_ICON,
+  VT_LABEL,
   VT_TEXT
 } from "./_legislative.types";
 import {FiguraPublica} from "../../services/profile.model";
@@ -100,34 +101,36 @@ export const VotingParty: React.FC<VotingPartyProps> = ({party, votes, type}) =>
                               <FontAwesomeIcon icon={['fas', VT_ICON[vote]]}/>
                             </span>
                           </Button>
+
+                          <div className="icon-result-text">
+                            <Grid container direction="column" justify="center" alignItems="center">
+                              <div className="font-size-sm text-black-50">{VT_LABEL[vote]}</div>
+                              <div className={`display-4 line-height-1 font-weight-bold ${VT_TEXT[vote]}`}>
+                                <CountUp start={0} end={voteNumber} duration={4} delay={2} separator="" decimals={0}
+                                         decimal=","/>
+                              </div>
+                            </Grid>
+                          </div>
                           <Hidden mdDown>
-                            <div className="icon-result-text">
-                              <Grid container direction="column" justify="center" alignItems="center">
-                                <div className="font-size-sm text-black-50">{VT_LABEL[vote]}</div>
-                                <div className={`display-4 line-height-1 font-weight-bold ${VT_TEXT[vote]}`}>
-                                  <CountUp start={0} end={voteNumber} duration={4} delay={2} separator="" decimals={0}
-                                           decimal=","/>
-                                </div>
-                              </Grid>
+
+                            <div className="avatars pl-3">
+                              <AvatarGroup max={6} hidden={expandedAccordion[vote]}>
+                                {Object.values(pfVotes[vote]).map(pf => {
+                                  const mediaDetails = getMediadetails(pf.Id);
+                                  if (mediaDetails?.avatar) {
+                                    return (
+                                      <Avatar key={`${pf.Id}`} round className="d-50" alt={pf.Nombre}
+                                              src={`${BASE_URL}/img/avatar/${mediaDetails.avatar}`}/>
+                                    )
+                                  } else {
+                                    return (
+                                      <Avatar key={`${pf.Id}`} round className="d-40" alt={pf.Nombre}/>
+                                    )
+                                  }
+                                })}
+                              </AvatarGroup>
                             </div>
                           </Hidden>
-                          <div className="avatars pl-3">
-                            <AvatarGroup max={6} hidden={expandedAccordion[vote]}>
-                              {Object.values(pfVotes[vote]).map(pf => {
-                                const mediaDetails = getMediadetails(pf.Id);
-                                if (mediaDetails?.avatar) {
-                                  return (
-                                    <Avatar key={`${pf.Id}`} round className="d-50" alt={pf.Nombre}
-                                            src={`${BASE_URL}/img/avatar/${mediaDetails.avatar}`}/>
-                                  )
-                                } else {
-                                  return (
-                                    <Avatar key={`${pf.Id}`} round className="d-40" alt={pf.Nombre}/>
-                                  )
-                                }
-                              })}
-                            </AvatarGroup>
-                          </div>
                         </Grid>
                       </div>
                     </AccordionSummary>
@@ -136,7 +139,7 @@ export const VotingParty: React.FC<VotingPartyProps> = ({party, votes, type}) =>
                         {pfVotes[vote].map(pf => {
                           const id = pf[LEGISLATOR_ID_KEY[type]] as string;
                           return (
-                            <Grid key={`legislator_${pf.Id}`} item xs={1} md={4} lg={3} className="text-center">
+                            <Grid key={`legislator_${pf.Id}`} item xs={6} md={4} lg={3} className="text-center">
                               <ProfileMini id={pf.Id} link={GET_LEGISLATOR_ID_PATH(type, id)}/>
                             </Grid>
                           )

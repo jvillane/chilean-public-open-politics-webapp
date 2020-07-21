@@ -1,6 +1,8 @@
 import axios from "axios";
 import {FiguraPublica, FigurasPublicas, Media, MediaDetails} from "./profile.model";
 import moment from "moment";
+import {Partido} from "./parties.model";
+import {getParty} from "./parties.service";
 
 let _media: Media;
 let _publicfigures: FigurasPublicas;
@@ -20,26 +22,34 @@ export const getMediadetails = (id: string): MediaDetails | undefined => {
   return _media[id];
 }
 
-export const getPublicFigurePartyId = (pf: FiguraPublica, votingDate?: string): string | undefined => {
-  const votingMoment = votingDate ? moment(votingDate) : moment();
+export const getPublicFigurePartyId = (pf: FiguraPublica, date?: string): string | undefined => {
+  const votingMoment = date ? moment(date) : moment();
   if (pf.Militancias) {
     for (const militancy of pf.Militancias) {
       if (militancy.Desde && militancy.Hasta) {
         if (votingMoment.isBetween(moment(militancy.Desde), moment(militancy.Hasta), 'day', '[]')) {
           return militancy.PartidoId;
         }
-      } else if(militancy.Desde) {
-        if(votingMoment.isSameOrAfter(militancy.Desde)){
+      } else if (militancy.Desde) {
+        if (votingMoment.isSameOrAfter(militancy.Desde)) {
           return militancy.PartidoId;
         }
-      } else if(militancy.Hasta) {
-        if(votingMoment.isSameOrBefore(militancy.Hasta)){
+      } else if (militancy.Hasta) {
+        if (votingMoment.isSameOrBefore(militancy.Hasta)) {
           return militancy.PartidoId;
         }
       } else {
         return militancy.PartidoId;
       }
     }
+  }
+  return undefined;
+}
+
+export const getPublicFigureParty = async (pf: FiguraPublica, date?: string): Promise<Partido | undefined> => {
+  const id = getPublicFigurePartyId(pf, date);
+  if (id) {
+    return await getParty(id);
   }
   return undefined;
 }
