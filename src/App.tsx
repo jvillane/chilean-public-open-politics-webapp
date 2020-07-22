@@ -8,9 +8,12 @@ import {
   faAngleRight,
   faBan,
   faCheck,
-  faFemale, faHandPaper,
+  faFemale,
+  faHandPaper,
   faMale,
-  faMinusCircle, faPeopleArrows, faQuoteRight,
+  faMinusCircle,
+  faPeopleArrows,
+  faQuoteRight,
   fas,
   faTimes,
   faUser
@@ -28,7 +31,6 @@ import {LegislativeSenatorDetailsView} from "./views/LegislativeSenatorDetailsVi
 import {LegislativeSenatorsVotingView} from "./views/LegislativeSenatorsVotingView";
 import {LegislativeSenatorsVotingDetailsView} from "./views/LegislativeSenatorsVotingDetailsView";
 import {SourcesView} from "./views/SourcesView";
-import {PublicFigureDetailsView} from "./views/PublicFigureDetailsView";
 
 library.add(
   fas,
@@ -83,9 +85,6 @@ function App() {
         </Route>
         <Route exact path="/senadores/votacion/:id">
           <Layout children={<LegislativeSenatorsVotingDetailsView/>}/>
-        </Route>
-        <Route exact path="/perfil/:id">
-          <Layout children={<PublicFigureDetailsView/>}/>
         </Route>
         <Redirect from="/10afp" to="/diputados/votacion/2020/33634"/>
         <Redirect from="/diputados" to="/diputados/integrantes"/>

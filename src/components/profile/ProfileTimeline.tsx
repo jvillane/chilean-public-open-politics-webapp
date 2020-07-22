@@ -1,5 +1,5 @@
 import React, {ReactNode, useEffect, useState} from 'react';
-import {Chip, Typography} from "@material-ui/core";
+import {Chip} from "@material-ui/core";
 import {
   Timeline,
   TimelineConnector,
@@ -13,13 +13,16 @@ import {Diputado} from "../../services/deputies.model";
 import {FiguraPublica} from "../../services/profile.model";
 import moment, {Moment} from "moment";
 import {Senador} from "../../services/senators.model";
-import {getDeputyLapses} from "../../services/deputies.service";
+import {getDeputyLapses, getVoting as getDeputyVoting} from "../../services/deputies.service";
 import {getPublicFigureParty} from "../../services/profile.service";
 import {getParties} from "../../services/parties.service";
 import {TimelineLapse} from "./timeline/TimelineLapse";
-import {getSenatorLapses} from "../../services/senators.service";
+import {getSenatorLapses, getVoting2 as getSenatorVoting} from "../../services/senators.service";
 import {getNewsByPublicFigureId} from "../../services/news.service";
 import {TimelineStory} from "./timeline/TimelineStory";
+import {getStarredDeputiesVoting, getStarredSenatorsVoting} from "../../services/starred.service";
+import {TimelineDeputyVoting} from "./timeline/TimelineDeputyVoting";
+import {TimelineSenatorVoting} from "./timeline/TimelineSenatorVoting";
 
 interface Props {
   publicFigure: FiguraPublica
@@ -60,6 +63,18 @@ export const ProfileTimeline: React.FC<Props> = ({publicFigure, deputy, senator}
           children: <TimelineLapse name={lapse.Id} party={partyTo}/>
         });
       }
+      for (const sVoting of await getStarredSenatorsVoting()) {
+        const voting = await getSenatorVoting(sVoting.Boletin, sVoting.Fecha);
+        if(voting === undefined) {
+          continue;
+        }
+        const momentDate = moment(voting.Fecha)
+        events.push({
+          date: momentDate,
+          displayDate: momentDate.format("DD-MMM-YYYY"),
+          children: <TimelineSenatorVoting text={sVoting.Resumen} voting={voting} figuraPublicaId={publicFigure.Id}/>
+        })
+      }
     }
   }
 
@@ -80,6 +95,18 @@ export const ProfileTimeline: React.FC<Props> = ({publicFigure, deputy, senator}
           displayDate: momentTo.format("DD-MMM-YYYY"),
           children: <TimelineLapse baja name={lapse.Nombre} party={partyTo}/>
         });
+      }
+      for (const sVoting of await getStarredDeputiesVoting()) {
+        const voting = await getDeputyVoting(sVoting.Anno, sVoting.Id);
+        if(voting === undefined) {
+          continue;
+        }
+        const momentDate = moment(voting.Fecha)
+        events.push({
+          date: momentDate,
+          displayDate: momentDate.format("DD-MMM-YYYY"),
+          children: <TimelineDeputyVoting text={sVoting.Resumen} voting={voting} deputyId={deputy.Id}/>
+        })
       }
     }
   }

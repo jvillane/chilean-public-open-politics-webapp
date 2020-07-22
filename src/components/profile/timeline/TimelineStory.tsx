@@ -49,7 +49,7 @@ export const TimelineStory: React.FC<Props> = ({story, publicFigureId}) => {
         Promise.all(story.FigurasPublicas.filter(pfId => pfId !== publicFigureId).map(pfId => getPublicFigure(pfId)))
           .then(pfs => setPfs(pfs));
       })
-  }, [open]);
+  }, [open, story.FigurasPublicas, publicFigureId]);
 
   return (
     <>

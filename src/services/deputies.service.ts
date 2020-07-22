@@ -1,6 +1,8 @@
 import {Diputado, DiputadoPeriodos, Diputados, PeriodoDiputado, Votacion, Votaciones} from "./deputies.model";
 import axios from "axios";
 import moment from "moment";
+import {VotacionDiputadosDestacada} from "./starred.model";
+import {getStarredDeputiesVoting} from "./starred.service";
 
 let _deputies: Diputados;
 let _lapses: DiputadoPeriodos;
@@ -29,7 +31,7 @@ export const getDeputies = async (): Promise<Diputados> => {
 }
 
 export const getDeputy = async (id?: string | number): Promise<Diputado | undefined> => {
-  if(id === undefined) {
+  if (id === undefined) {
     return undefined;
   }
   if (_deputies === undefined) {
@@ -61,4 +63,13 @@ export const getVoting = async (year: string, id: string): Promise<Votacion | un
     }
   }
   return undefined;
+}
+
+export const getStarredDeputiesVotingById = async (): Promise<{ starred: VotacionDiputadosDestacada[], votings: (Votacion | undefined)[] }> => {
+  return new Promise(resolve => {
+    getStarredDeputiesVoting()
+      .then(starred => Promise.all(starred.map(sv => getVoting(sv.Anno, sv.Id)))
+        .then(votings => resolve({starred, votings}))
+      )
+  })
 }

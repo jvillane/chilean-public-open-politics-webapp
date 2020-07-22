@@ -38,7 +38,7 @@ export const LegislativeSenatorsVotingDetailsView: React.FC = () => {
                         <b>Fecha</b>
                       </div>
                       <div className="text-black-50 text-center font-size-md">
-                        {moment.utc(voting.Fecha).tz('America/Santiago').format('DD-MMM-YYYY')}
+                        {moment.utc(voting.Fecha).format('DD-MMM-YYYY')}
                         <div className="text-info font-size-sm">
                           {moment(voting.Fecha).fromNow()}
                         </div>

@@ -38,7 +38,7 @@ export const LegislativeDeputiesVotingView: React.FC = () => {
 
   useEffect(() => {
     if (year === undefined || month === undefined) {
-      setYearMonth(nowYear, nowMonth);
+      setYearMonth(nowYear, nowMonth + 1);
     } else if (+year < MIN_YEAR || (+year === MIN_YEAR && +month < MIN_MONTH) || !Number.isInteger(+year) || !Number.isInteger(+month)) {
       setYearMonth(MIN_YEAR, MIN_MONTH);
     }
@@ -97,7 +97,7 @@ export const LegislativeDeputiesVotingView: React.FC = () => {
                           variant={index + 1 === +month ? "contained" : "outlined"}
                           onClick={() => setYearMonth(year, index + 1)}
                           disabled={(+year === MIN_YEAR && index + 1 < MIN_MONTH) || (+year === nowYear && index > nowMonth)}>
-                    {name.substring(0,3)}
+                    {name.substring(0, 3)}
                   </Button>
                 );
               })}

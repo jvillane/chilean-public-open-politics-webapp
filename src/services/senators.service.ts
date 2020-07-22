@@ -81,3 +81,19 @@ export const getVoting = async (id: string): Promise<Votacion | undefined> => {
   }
   return undefined;
 }
+
+export const getVoting2 = async (boletin: string, date: string): Promise<Votacion | undefined> => {
+  if (_votings === undefined) {
+    _votings = await getVotings();
+  }
+  for (const lawProject of Object.values(_lawProjects)) {
+    if (lawProject.BoletinNumero === boletin) {
+      for (const voting of lawProject.Votaciones) {
+        if(voting.Fecha === date){
+          return voting;
+        }
+      }
+    }
+  }
+  return undefined;
+}

@@ -14,7 +14,6 @@ export const LegislativeSenatorDetailsView: React.FC = () => {
   useEffect(() => {
     getSenator(id)
       .then(senator => {
-        console.log(senator);
         if (senator && senator.FiguraPublicaId) {
           setPublicFigureId(senator.FiguraPublicaId)
         } else {
@@ -23,7 +22,6 @@ export const LegislativeSenatorDetailsView: React.FC = () => {
       })
   }, [id])
 
-  console.log(publicFigureId);
   return (
     <Profile id={publicFigureId}/>
   )
