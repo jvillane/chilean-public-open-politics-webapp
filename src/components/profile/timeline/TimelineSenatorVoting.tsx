@@ -30,7 +30,7 @@ export const TimelineSenatorVoting: React.FC<Props> = ({text, voting, figuraPubl
         <p className="text-justify">{text}</p>
         <div className="divider mx-auto my-3 w-100"/>
         <Grid container spacing={3} className="text-center">
-          <Grid item sm={4} className="text-center">
+          <Grid item xs={4} className="text-center">
             <Button size="small" variant="text"
                     className="btn-animated-icon d-30 btn-pill p-0 mb-2 btn-icon btn-success">
                         <span className="btn-wrapper--icon">
@@ -41,7 +41,7 @@ export const TimelineSenatorVoting: React.FC<Props> = ({text, voting, figuraPubl
               <CountUp start={0} end={voting.Resultado.Si} duration={4} delay={2} separator="" decimals={0} decimal=","/>
             </div>
           </Grid>
-          <Grid item sm={4} className="text-center">
+          <Grid item xs={4} className="text-center">
             <Button size="small" variant="text"
                     className="btn-animated-icon d-30 btn-pill p-0 mb-2 btn-icon btn-danger">
                         <span className="btn-wrapper--icon">
@@ -52,7 +52,7 @@ export const TimelineSenatorVoting: React.FC<Props> = ({text, voting, figuraPubl
               <CountUp start={0} end={voting.Resultado.No} duration={4} delay={2} separator="" decimals={0} decimal=","/>
             </div>
           </Grid>
-          <Grid item sm={4} className="text-center">
+          <Grid item xs={4} className="text-center">
             <Button size="small" variant="text"
                     className="btn-animated-icon d-30 btn-pill p-0 mb-2 btn-icon btn-warning">
                         <span className="btn-wrapper--icon">

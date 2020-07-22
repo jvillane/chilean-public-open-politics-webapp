@@ -1,5 +1,5 @@
 import React, {ReactNode, useEffect, useState} from 'react';
-import {Chip} from "@material-ui/core";
+import {Chip, Grid, Hidden} from "@material-ui/core";
 import {
   Timeline,
   TimelineConnector,
@@ -65,7 +65,7 @@ export const ProfileTimeline: React.FC<Props> = ({publicFigure, deputy, senator}
       }
       for (const sVoting of await getStarredSenatorsVoting()) {
         const voting = await getSenatorVoting(sVoting.Boletin, sVoting.Fecha);
-        if(voting === undefined) {
+        if (voting === undefined) {
           continue;
         }
         const momentDate = moment(voting.Fecha)
@@ -98,7 +98,7 @@ export const ProfileTimeline: React.FC<Props> = ({publicFigure, deputy, senator}
       }
       for (const sVoting of await getStarredDeputiesVoting()) {
         const voting = await getDeputyVoting(sVoting.Anno, sVoting.Id);
-        if(voting === undefined) {
+        if (voting === undefined) {
           continue;
         }
         const momentDate = moment(voting.Fecha)
@@ -129,21 +129,39 @@ export const ProfileTimeline: React.FC<Props> = ({publicFigure, deputy, senator}
   }
 
   return (
-    <Timeline align="alternate" className="py-3">
-      {events && events.map((event, key) => {
-        return (
-          <TimelineItem key={key}>
-            <TimelineOppositeContent>
-              <Chip label={event.displayDate} variant="outlined" className="bg-gray-200 text-primary"/>
-            </TimelineOppositeContent>
-            <TimelineSeparator className="my-2">
-              <TimelineDot variant="outlined" color="grey"/>
-              <TimelineConnector/>
-            </TimelineSeparator>
-            <TimelineContent>{event.children}</TimelineContent>
-          </TimelineItem>
-        )
-      })}
-    </Timeline>
+    <>
+      <Hidden mdUp>
+        <Grid container direction="column" justify="center" alignItems="center">
+          {events && events.map((event, key) => {
+            return (
+              <Grid key={key} container direction="column" justify="center" alignItems="center">
+                <Chip label={event.displayDate} variant="outlined" className="bg-gray-200 text-primary mb-3"/>
+                <div className="mb-4">
+                  {event.children}
+                </div>
+              </Grid>
+            )
+          })}
+        </Grid>
+      </Hidden>
+      <Hidden smDown>
+        <Timeline align="alternate" className="py-3">
+          {events && events.map((event, key) => {
+            return (
+              <TimelineItem key={key}>
+                <TimelineOppositeContent>
+                  <Chip label={event.displayDate} variant="outlined" className="bg-gray-200 text-primary"/>
+                </TimelineOppositeContent>
+                <TimelineSeparator className="my-2">
+                  <TimelineDot variant="outlined" color="grey"/>
+                  <TimelineConnector/>
+                </TimelineSeparator>
+                <TimelineContent>{event.children}</TimelineContent>
+              </TimelineItem>
+            )
+          })}
+        </Timeline>
+      </Hidden>
+    </>
   );
 }
