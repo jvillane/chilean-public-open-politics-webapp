@@ -6,6 +6,8 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {Button, Collapse, Container, List, ListItem} from '@material-ui/core';
 import {NavLink, useHistory} from 'react-router-dom';
 
+import projectLogo from '../img/logo.svg';
+
 export const Header: React.FC = () => {
   const [collapse, setCollapse] = useState(false);
   const toggle = () => setCollapse(!collapse);
@@ -19,6 +21,11 @@ export const Header: React.FC = () => {
             className="bg-white p-2 shadow-xxl header-nav-wrapper header-nav-wrapper-xl rounded-bottom px-4 navbar-light">
             <div className="app-nav-logo">
               <NavLink to="/" title="Open Data Chile - Legislativo" className="app-nav-logo app-nav-logo--dark">
+                {false && (
+                  <div className="app-nav-logo--icon shadow-second-sm border-0 bg-secondary">
+                    <img alt="Open Data Chile" src={projectLogo}/>
+                  </div>
+                )}
                 <div className="app-nav-logo--text">
                   <span>legislativo</span>
                   <b>open-data.cl</b>
@@ -66,16 +73,16 @@ export const Header: React.FC = () => {
                     <div className="shadow-lg w-100 bg-deep-sky p-4 rounded">
                       <List component="div" className="nav-pills nav-transparent nav-pills-rounded flex-column">
                         <ListItem button className="px-4 text-white-50 d-flex align-items-center"
-                          onClick={() => {
-                            history.push('/senadores/integrantes')
-                          }}>
+                                  onClick={() => {
+                                    history.push('/senadores/integrantes')
+                                  }}>
                           <span>Integrantes</span>
                           <FontAwesomeIcon icon={['fas', 'angle-right']} className="opacity-6 ml-auto"/>
                         </ListItem>
                         <ListItem button className="px-4 d-flex text-white-50 align-items-center"
-                          onClick={() => {
-                            history.push('/senadores/votaciones')
-                          }}>
+                                  onClick={() => {
+                                    history.push('/senadores/votaciones')
+                                  }}>
                           <span>Votaciones</span>
                           <FontAwesomeIcon icon={['fas', 'angle-right']} className="opacity-6 ml-auto"/>
                         </ListItem>
@@ -85,7 +92,7 @@ export const Header: React.FC = () => {
                 </li>
                 <li className="justify-content-center">
                   <NavLink to="/fuentes"
-                     className="font-weight-bold rounded-sm px-3">
+                           className="font-weight-bold rounded-sm px-3">
                     Fuentes
                   </NavLink>
                 </li>
