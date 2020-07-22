@@ -11,6 +11,9 @@ import moment from "moment-timezone";
 import DateFnsUtils from "@date-io/moment";
 import {MuiPickersUtilsProvider} from "@material-ui/pickers";
 
+import './assets/base.scss';
+import './css/style.scss';
+
 ReactGA.initialize('UA-170181856-1');
 ReactGA.pageview(window.location.pathname + window.location.search);
 

@@ -44,7 +44,7 @@ export const Profile: React.FC<Props> = ({id}) => {
   return (
     <Container>
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={6} lg={4}>
+        <Grid item xs={12} sm={5} lg={3}>
           <Paper elevation={3}>
             {state && (
               <ProfileInfo publicFigure={state.publicFigure} deputy={state.deputy} senator={state.senator}/>
@@ -63,14 +63,12 @@ export const Profile: React.FC<Props> = ({id}) => {
             )}
           </Paper>
         </Grid>
-        <Grid item xs={12} sm={6} lg={8}>
-          <Paper elevation={3}>
-            {state && (
-              <FadeIn transitionDuration={1000}>
-                <ProfileTimeline publicFigure={state.publicFigure} deputy={state.deputy} senator={state.senator}/>
-              </FadeIn>
-            )}
-          </Paper>
+        <Grid item xs={12} sm={7} lg={9}>
+          {state && (
+            <FadeIn transitionDuration={1000}>
+              <ProfileTimeline publicFigure={state.publicFigure} deputy={state.deputy} senator={state.senator}/>
+            </FadeIn>
+          )}
         </Grid>
       </Grid>
     </Container>

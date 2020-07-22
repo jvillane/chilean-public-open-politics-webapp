@@ -9,7 +9,7 @@ import {getParty} from "../../services/parties.service";
 import {Typography} from "@material-ui/core";
 
 interface Props {
-  link: string
+  link?: string
   id: string
   withPartyName?: boolean
 }
@@ -22,6 +22,7 @@ interface State {
 export const ProfileMini: React.FC<Props> = ({link, id, withPartyName}) => {
   const history = useHistory();
   const [state, setState] = useState<State>();
+  const theLink = link ? link : `/perfil/${id}`;
 
   useEffect(() => {
     getPublicFigure(id)
@@ -44,7 +45,7 @@ export const ProfileMini: React.FC<Props> = ({link, id, withPartyName}) => {
       {state && (
         <>
           <div className="avatar-icon-wrapper rounded-circle d-80 mx-auto clickable"
-               onClick={() => history.push(link)}>
+               onClick={() => history.push(theLink)}>
             <div className="d-block p-0 avatar-icon-wrapper rounded-circle m-0">
               <Avatar round alt={state.publicFigure.Nombre} size="80px" name={state.publicFigure.Nombre}
                       src={imgSource}/>
