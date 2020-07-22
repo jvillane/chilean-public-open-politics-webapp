@@ -47,10 +47,10 @@ export const HomeView: React.FC = () => {
             </p>
           </Grid>
         </div>
-        <Grid container spacing={5} className="mb-3 px-5">
+        <Grid container spacing={5} className="mb-3">
           <Grid item md={6}>
             <Card className="card-border-top border-info">
-              <CardContent>
+              <CardContent className="camara-resumen">
                 <h3 className="font-size-xl font-weight-bold mb-4 text-info">
                   Cámara de Diputados
                 </h3>
@@ -89,7 +89,7 @@ export const HomeView: React.FC = () => {
                       <FontAwesomeIcon icon={['fas', 'angle-right']}/>
                     </div>
                     <span className="pt-1">
-                      Percibe una dieta líquida de <span className="font-weight-bolder text-info">
+                      En su portal, la información oficial indica que perciben una dieta mensual líquida de <span className="font-weight-bolder text-info">
                       $ <CountUp start={0} end={6848420} duration={2} delay={0} separator="." decimals={0} decimal=","/>
                     </span>
                     </span>
@@ -100,7 +100,7 @@ export const HomeView: React.FC = () => {
           </Grid>
           <Grid item md={6}>
             <Card className="card-border-top border-warning">
-              <CardContent>
+              <CardContent className="camara-resumen">
                 <h3 className="font-size-xl font-weight-bold mb-4 text-warning">
                   Senado
                 </h3>
@@ -139,7 +139,7 @@ export const HomeView: React.FC = () => {
                       <FontAwesomeIcon icon={['fas', 'angle-right']}/>
                     </div>
                     <span className="pt-1">
-                      Percibe una dieta mensual bruta de <span className="font-weight-bolder text-warning">
+                      En su portal, la información oficial indica que perciben una dieta mensual bruta de <span className="font-weight-bolder text-warning">
                       $ <CountUp start={0} end={9349851} duration={2} delay={0} separator="." decimals={0} decimal=","/>
                     </span>
                     </span>
@@ -158,7 +158,7 @@ export const HomeView: React.FC = () => {
         <Grid container spacing={0} className="w-100 mb-3 mb-xl-0">
           <Grid item lg={4}>
             <div className="feature-box px-4 text-center">
-              <h3 className="font-size-xl font-weight-bold my-3 text-danger">
+              <h3 className="font-size-xl font-weight-bold my-3 text-primary">
                 Fuero Parlamentario
               </h3>
               <p className="opacity-4 mb-3">
@@ -176,7 +176,7 @@ export const HomeView: React.FC = () => {
           </Grid>
           <Grid item lg={4}>
             <div className="feature-box px-4 text-center">
-              <h3 className="font-size-xl font-weight-bold my-3 text-danger">
+              <h3 className="font-size-xl font-weight-bold my-3 text-primary">
                 Inviolabilidad Parlamentaria
               </h3>
               <p className="opacity-4 mb-3">
@@ -190,7 +190,7 @@ export const HomeView: React.FC = () => {
           </Grid>
           <Grid item lg={4}>
             <div className="feature-box px-4 text-center">
-              <h3 className="font-size-xl font-weight-bold my-3 text-danger">
+              <h3 className="font-size-xl font-weight-bold my-3 text-primary">
                 Dieta Parlamentaria
               </h3>
               <p className="opacity-4 mb-3">
