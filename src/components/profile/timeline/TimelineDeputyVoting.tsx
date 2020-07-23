@@ -13,7 +13,11 @@ interface Props {
 
 export const TimelineDeputyVoting: React.FC<Props> = ({text, voting, deputyId}) => {
 
-  const vote = getDeputyVotingValue(voting.Votos[deputyId]);
+  const vote = voting.Votos[deputyId] ? getDeputyVotingValue(voting.Votos[deputyId]) : undefined;
+
+  if (vote === undefined) {
+    return null;
+  }
 
   return (
     <Card className="card-border-top border-info mb-3" elevation={3}>
@@ -59,7 +63,8 @@ export const TimelineDeputyVoting: React.FC<Props> = ({text, voting, deputyId}) 
                         </span>
             </Button>
             <div className="display-5 line-height-sm font-weight-light text-warning">
-              <CountUp start={0} end={voting.Total.Abstencion} duration={4} delay={2} separator="" decimals={0} decimal=","/>
+              <CountUp start={0} end={voting.Total.Abstencion} duration={4} delay={2} separator="" decimals={0}
+                       decimal=","/>
             </div>
           </Grid>
         </Grid>
