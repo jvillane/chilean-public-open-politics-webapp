@@ -65,7 +65,7 @@ export const ProfileTimeline: React.FC<Props> = ({publicFigure, deputy, senator}
       }
       for (const sVoting of await getStarredSenatorsVoting()) {
         const voting = await getSenatorVoting(sVoting.Boletin, sVoting.Fecha);
-        if (voting === undefined) {
+        if (voting === undefined || voting.Detalle[senator.FiguraPublicaId] === undefined) {
           continue;
         }
         const momentDate = moment(voting.Fecha)
@@ -98,7 +98,7 @@ export const ProfileTimeline: React.FC<Props> = ({publicFigure, deputy, senator}
       }
       for (const sVoting of await getStarredDeputiesVoting()) {
         const voting = await getDeputyVoting(sVoting.Anno, sVoting.Id);
-        if (voting === undefined) {
+        if (voting === undefined || voting.Votos[deputy.Id] === undefined) {
           continue;
         }
         const momentDate = moment(voting.Fecha)
