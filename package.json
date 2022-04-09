@@ -24,7 +24,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/react-swipeable": "^5.2.0",
     "axios": "^0.19.2",
-    "moment": "^2.27.0",
+    "moment": "^2.29.2",
     "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
